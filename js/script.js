@@ -152,7 +152,6 @@ function resultado(jugador){
                 }
               else if(pesoJugador1>21){
                 partidaEnProgreso=false;
-                mostrarMano(jugador1,manoJugador1,pesoJugador1);
                 console.log("💀💀 Perdiste! sumaste mas de 21 puntos 💀💀")
                 confirm("Continuar");
                 iniciarInterface();}}
