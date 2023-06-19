@@ -5,7 +5,7 @@ let pesoJugador1=0;
 let pesoJugador2=0;
 let jugador1="";
 let jugador2 = "crupier"
-let partidaEnProgreso=false
+let partidaEnProgreso=false //define el estado actual de la partida
 
 
 
@@ -13,11 +13,11 @@ let partidaEnProgreso=false
 function iniciarInterface(){
 console.clear();
 let nuevaPartida=prompt("Desea empezar una nueva partida de consoleBlackJack?(Y/N)");    
-if(nuevaPartida.toLowerCase()=="y"){
+if(nuevaPartida.toLowerCase()=="y"){  // se utiliza el metodo toLowerCase() para salvar las mayusculas
 partidaEnProgreso=true;                           
-if(jugador1==""){jugador1=prompt("Ingresa tu nombre");}
+if(jugador1==""){jugador1=prompt("Ingresa tu nombre");}  // se utiliza el if para no volver a preguntar el nombre en siguientes rondas
 console.log("❤️♠️🔶🍀 Que empiece el juego "+ jugador1 + "! ❤️♠️🔶🍀")    
-partidaConsoleBlackJack();
+partidaConsoleBlackJack(); 
 }else if(nuevaPartida.toLowerCase()=="n" ){
 partidaEnProgreso=false
 console.log("❤️♠️🔶🍀 Gracias! vuelva prontosss ❤️♠️🔶🍀")
@@ -28,13 +28,13 @@ iniciarInterface();
 }
 }
 
-function partidaConsoleBlackJack(){
-resetearPartida();
-empezarJuego();
-if(partidaEnProgreso==true){siguienteRonada();}
+function partidaConsoleBlackJack(){          //es la funcion principal del programa
+resetearPartida(); 
+empezarJuego(); 
+if(partidaEnProgreso==true){siguienteRonada();} //se utiliza el if para evitar caminos indeseados
 }
 
-function empezarJuego(){
+function empezarJuego(){    //reparte las cartas y evalua la primera mano
 
 manoJugador1.push(cartaAlAzar(),cartaAlAzar())
 manoJugador2.push(cartaAlAzar(),cartaAlAzar())
@@ -43,33 +43,33 @@ mostrarMano(jugador1,manoJugador1,pesoJugador1);
 resultado(jugador1)
 }
 
-function pedirCarta(mano){
+function pedirCarta(mano){         //ingresa una nueva carta random en la mano del jugador que se desee
     mano.push(cartaAlAzar());
     
     }
 
-function cartaAlAzar(){
+function cartaAlAzar(){            //genera un numero aleatorio del 1 al 10
      let min=1
      let max=10
      return Math.floor((Math.random() * (max - min + 1)) + min);
     }
 
-function evaluar(){
+function evaluar(){            //actualiza las variables
     pesoJugador1=contarCartas(manoJugador1);
     pesoJugador2=contarCartas(manoJugador2);
          
 
-   function contarCartas(mano){
+   function contarCartas(mano){  //funcion auxiliar de evaluar, suma los puntos de una mano deseada
     let cantidadDeAs=0
     let acumulado=0
     for(let i=0;i<mano.length;i++){
     if(mano[i]==1){
     cantidadDeAs++;
-    continue
+    continue   // si la carta actual es uno, suma una unidad al contador de ases y continua el ciclo para evaluarlos al final
     }else{acumulado+=mano[i];}    
      }
    
-if(cantidadDeAs>0){
+if(cantidadDeAs>0){   //elvalua los 1 y les da el valor adecuado a la mano actual
     for(let i =0;i<cantidadDeAs;i++){
         if(acumulado+11+cantidadDeAs-1<=21){
             acumulado+=11
@@ -84,14 +84,14 @@ return acumulado
    
 }
 
-function resetearPartida(){
+function resetearPartida(){   //inicializa las variables
 manoJugador1=[];
 manoJugador2=[];
 pesoJugador1=0;
 pesoJugador2=0;
 }
 
-function siguienteRonada(){
+function siguienteRonada(){     // es un ciclo que termina cuando uno decide plantarse invocando la funcion "plantarse()"
    let seguir=prompt("Te plantas??🐔 (Y/N)")
    if(seguir.toLowerCase()=="n"){
    pedirCarta(manoJugador1);
@@ -108,7 +108,7 @@ function siguienteRonada(){
    }
 }
 
-function mostrarMano(player,mano,peso){
+function mostrarMano(player,mano,peso){    //muestra la mano de un jugador deseado
     console.log("la mano de " + player + " es: ")
     for(let i=0;i<mano.length;i++){
         console.log("Carta " + (i+1)+":"+mano[i])
@@ -118,18 +118,18 @@ function mostrarMano(player,mano,peso){
 
 
 
-function plantarse(){
+function plantarse(){   // a partir de aqui, comienza a jugar el programa
     
     
         mostrarMano(jugador2,manoJugador2,pesoJugador2);
-        while(pesoJugador2<17){
+        while(pesoJugador2<17){  // el ciclo termina cuando se cumpla la condicion del reglamneto del juego
             confirm("La mano del crupier es menor o igual a 17, pide otra carta");
             pedirCarta(manoJugador2);
             evaluar();
             mostrarMano(jugador2,manoJugador2,pesoJugador2);
             
             }
-            resultado(jugador2)
+            resultado(jugador2) // el hecho de que salga del ciclo implica el fin definitivo de la mano actual
         }
          
     
@@ -138,9 +138,9 @@ function plantarse(){
 
 
 
-function resultado(jugador){
+function resultado(jugador){   // evalua la situacion de la partida en diferentes estados de la misma, se utiliza el parametro jugador para definir estos estados.
     if (jugador==jugador1){if(manoJugador1.length==2 && pesoJugador1==21){
-        partidaEnProgreso=false
+        partidaEnProgreso=false 
         console.log("❤️♠️🔶🍀 Felicitaciones! Conseguiste un BlackJack y ganaste la partida! ❤️♠️🔶🍀")
         confirm("Continuar");     
         iniciarInterface();
