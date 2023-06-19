@@ -6,13 +6,21 @@ let pesoJugador2=0;
 let jugador1="";
 let jugador2 = "crupier"
 let partidaEnProgreso=false //define el estado actual de la partida
+let primeraMano=true
 
 
 
 
 function iniciarInterface(){
 console.clear();
-let nuevaPartida=prompt("Desea empezar una nueva partida de consoleBlackJack?(Y/N)");    
+let nuevaPartida;
+if(primeraMano){
+nuevaPartida=prompt("Desea empezar una nueva partida de consoleBlackJack?(Y/N)");
+primeraMano=false
+}
+
+else{nuevaPartida=prompt("Desea empezar una nueva mano de consoleBlackJack?(Y/N)");}
+    
 if(nuevaPartida.toLowerCase()=="y"){  // se utiliza el metodo toLowerCase() para salvar las mayusculas
 partidaEnProgreso=true;                           
 if(jugador1==""){jugador1=prompt("Ingresa tu nombre");}  // se utiliza el if para no volver a preguntar el nombre en siguientes rondas
