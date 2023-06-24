@@ -1,4 +1,6 @@
-let cartas=[1,2,3,4,5,6,7,8,9,10];
+window.addEventListener("load",main,false)
+function main(){
+
 let manoJugador1=[];
 let manoJugador2=[];
 let pesoJugador1=0;
@@ -7,10 +9,10 @@ let jugador1="";
 let jugador2 = "crupier"
 let partidaEnProgreso=false //define el estado actual de la partida
 let primeraMano=true
+let maso1=new Maso(false);
 
 
-
-
+iniciarInterface();
 function iniciarInterface(){
 console.clear();
 let nuevaPartida;
@@ -44,22 +46,16 @@ if(partidaEnProgreso==true){siguienteRonada();} //se utiliza el if para evitar c
 
 function empezarJuego(){    //reparte las cartas y evalua la primera mano
 
-manoJugador1.push(cartaAlAzar(),cartaAlAzar())
-manoJugador2.push(cartaAlAzar(),cartaAlAzar())
+manoJugador1.push(maso1.sacarCarta(),maso1.sacarCarta())
+manoJugador2.push(maso1.sacarCarta(),maso1.sacarCarta())
 evaluar();
 mostrarMano(jugador1,manoJugador1,pesoJugador1);
 resultado(jugador1)
 }
 
 function pedirCarta(mano){         //ingresa una nueva carta random en la mano del jugador que se desee
-    mano.push(cartaAlAzar());
-    
-    }
-
-function cartaAlAzar(){            //genera un numero aleatorio del 1 al 10
-     let min=1
-     let max=10
-     return Math.floor((Math.random() * (max - min + 1)) + min);
+    mano.push(maso1.sacarCarta());
+       
     }
 
 function evaluar(){            //actualiza las variables
@@ -71,10 +67,10 @@ function evaluar(){            //actualiza las variables
     let cantidadDeAs=0
     let acumulado=0
     for(let i=0;i<mano.length;i++){
-    if(mano[i]==1){
+    if(mano[i].valor[0]==1){
     cantidadDeAs++;
     continue   // si la carta actual es uno, suma una unidad al contador de ases y continua el ciclo para evaluarlos al final
-    }else{acumulado+=mano[i];}    
+    }else{acumulado+=mano[i].valor[0];}    
      }
    
 if(cantidadDeAs>0){   //elvalua los 1 y les da el valor adecuado a la mano actual
@@ -119,7 +115,7 @@ function siguienteRonada(){     // es un ciclo que termina cuando uno decide pla
 function mostrarMano(player,mano,peso){    //muestra la mano de un jugador deseado
     console.log("la mano de " + player + " es: ")
     for(let i=0;i<mano.length;i++){
-        console.log("Carta " + (i+1)+":"+mano[i])
+        console.log("Carta " + (i+1)+":"+mano[i].id)
     }
     console.log("Suman " + peso+ " puntos")
 }
@@ -211,7 +207,7 @@ function reglamento(){
     iniciarInterface()
 
 }
-    
+}
 
 
 
