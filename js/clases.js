@@ -38,7 +38,6 @@ class Maso {
 class Carta{
         palo
         id
-        imagen=new Image
         srcImagen
         srcDorso="../cartas/joker/2.png"
         valor=[]
@@ -58,7 +57,7 @@ class Carta{
             else if(val>1 && val<=10){this.valor=[val]}
             else if(val>=11 && val<=13){this.valor=[10]}
             this.srcImagen=src
-            this.imagen.src=src
+            
         
             if(p=="picas" || p=="trebol"){
                 this.color="negro"
@@ -71,11 +70,38 @@ class Carta{
         
         girar(){
             if(this.cara==false){
-            this.cara=true
-            this.imagen.src=this.srcImagen}
+            this.cara=true}
             else if(this.cara==true){this.cara=false
-            this.imagen.src=this.srcDorso}
+            }
         }
+        }
+    
+    class Mesa{
+    jugador1=[]
+    jugador2=[]
+    constructor(){
+        this.jugador1=[]
+        this.jugador2=[]
+    }
+        crearCarta(carta,jugador){
+                    let divMesa = document.getElementById('displayMesa')
+                    let nuevoDiv=document.createElement("div")
+                    nuevoDiv.style.backgroundImage=`url(${carta.srcImagen})`
+                    if(jugador==1){
+                    nuevoDiv.style.left=`${36+this.jugador1.length*5}%`  
+                    this.jugador1.push(carta)
+                    nuevoDiv.classList.add("carta1")}
+                    else if(jugador==2){
+                    nuevoDiv.style.left=`${36+this.jugador2.length*5}%`  
+                    this.jugador2.push(carta)
+                    nuevoDiv.classList.add("carta2")
+                    }
+                    nuevoDiv.classList.add("animate__animated")
+                    nuevoDiv.classList.add("animate__backInLeft")
+                    
+                    divMesa.appendChild(nuevoDiv)                   
+                
+            }
         }
     
     

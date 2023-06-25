@@ -1,4 +1,6 @@
 window.addEventListener("load",main,false)
+let maso1;
+let mesa;
 function main(){
 
 let manoJugador1=[];
@@ -9,10 +11,11 @@ let jugador1="";
 let jugador2 = "crupier"
 let partidaEnProgreso=false //define el estado actual de la partida
 let primeraMano=true
-let maso1=new Maso(false);
+maso1=new Maso(false);
+mesa=new Mesa
 
 
-iniciarInterface();
+
 function iniciarInterface(){
 console.clear();
 let nuevaPartida;

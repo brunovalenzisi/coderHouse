@@ -1,5 +1,35 @@
-
-
-.panio{
-    position: relative;
+   .carta1{
+    top: 63%;
+    border-width: 1px; 
+    border-style: solid;
+    border-radius: 8px;
+    position:absolute;
+    width:150px;
+    height: 220px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
+
+
+.carta2{
+    top: 20%;
+    border-width: 1px; 
+    border-style: solid;
+    border-radius: 8px;
+    position:absolute;
+    width:150px;
+    height: 220px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.mesa{
+    position: relative;
+    width:1500px;
+    height:1000px;
+    background-image: url(../mesa/mesa.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border-radius: 50px;
+}
+
