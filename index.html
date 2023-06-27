@@ -3,11 +3,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="./estilos/estilos.css">
+  
     <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
+  <link rel="stylesheet" href="./estilos/estilos.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,10 +16,25 @@
     
 </head>
 <body>
+  
 
 <div style=" display: flex;justify-content: center;align-items: center;">
-    <div class="mesa" id="displayMesa">
-       
+  
+  
+    <div class="mesa" id="mesa">
+      <div class="mano1" id="mano1" onclick="pedir(1)"></div>
+      <div class="mano2" id="mano2" onclick="pedir(2)" ></div> 
+      <div class="mano3" id="mano3" onclick="pedir(3)" ></div>
+      <div class="mano4" id="mano4" ></div>
+      <div class="control" id="control">
+        <div id="apostar10" class="botonApostar10">10Cdts</div>
+        <div id="apostar100" class="botonApostar100">100Cdts</div>
+        <div id="apostar500" class="botonApostar500">500Cdts</div>
+        <div id="apostar1000" class="botonApostar1000">1000Cdts</div>
+      <div id="botonPedir" class="botonPedir">Pedir Carta</div>
+      <div id="botonPlantarse" class="botonPlantarse" onclick="plantarse()">Plantarse</div>
+      
+      </div>  
          
        
                 
