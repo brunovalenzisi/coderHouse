@@ -155,9 +155,16 @@ function pedir(mano){
             function empezarJuego(){    //reparte las cartas y evalua la primera mano
 
                 mesa.entregarCarta(1,maso)
-                mesa.entregarCarta(1,maso)
-                mesa.entregarCarta(4,maso)
-                mesa.entregarCarta(4,maso)
+                setTimeout(() => {
+                mesa.entregarCarta(1,maso)    
+                  }, 800);
+                  setTimeout(() => {
+                    mesa.entregarCarta(4,maso)    
+                      }, 1600);
+                      setTimeout(() => {
+                        mesa.entregarCarta(4,maso)    
+                          }, 2400);
+                   
                 evaluar();
                 mesa.manos.forEach(mano => resultado(1,mano));
                 }
