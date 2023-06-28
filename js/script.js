@@ -18,13 +18,8 @@ let node1000=document.getElementById("apostar1000")
 
 
 function pantallaInicial(){
-    let botonIniciar=document.createElement("h1")
-    botonIniciar.classList.add("botonIniciar")
-    botonIniciar.id="botonIniciar"
-    botonIniciar.innerHTML="Comenzar Partida"
-    botonIniciar.addEventListener("click",partidaConsoleBlackJack,false)
-    nodeMesa.appendChild(botonIniciar)
-    animarClase("botonIniciar","bounce")
+mesa=new Mesa
+crearBoton("Comenzar Partida")
 }
 
 
@@ -64,35 +59,34 @@ function pedir(mano){
         if(mano.id<4 && mano.peso>0){ 
         if (jugador==1){if(mano.cartas.length==2 && mano.peso==21){
             console.log("❤️♠️🔶🍀 Felicitaciones! Conseguiste un BlackJack y ganaste la partida! ❤️♠️🔶🍀")
-            confirm("Continuar");     
+           mano.cerrar()     
             }  else
                 if(mano.peso==21){
                     console.log("Conseguiste 21 puntos, te plantas");
-                    confirm("Continuar");
+                    mano.cerrar() 
                     plantarse();
                     }
                   else if(mano.peso>21){
                     console.log("💀💀 Perdiste! sumaste mas de 21 puntos 💀💀")
-                    confirm("Continuar");
+                    mano.cerrar() 
                     }}
                     
                     else if(jugador==2){
                         if(mesa.manos[3].peso>21){
                             console.log("El crupier se paso")
                             console.log(" ❤️♠️🔶🍀 Felicitaciones! ganaste la partida! ❤️♠️🔶🍀")
-                            confirm("Continuar");
+                             
                             }
                             else if(mano.peso>mesa.manos[3].peso){
                                 console.log("❤️♠️🔶🍀 Felicitaciones! ganaste la partida! ❤️♠️🔶🍀")
-                                confirm("Continuar"); 
                                 }else if (mano.peso<mesa.manos[3].peso){
                                 console.log("💀💀 Perdiste! El crupier sumo mas puntos 💀💀")
-                                confirm("Continuar");
+                                
                                 
                                 
                             }else if(mano.peso==mesa.manos[3].peso){
                                 console.log("😐La partida resulto en empate😐");
-                                confirm("Continuar");
+                                
                                 }
                     }
                             
@@ -136,9 +130,11 @@ function pedir(mano){
     mesa.manos.forEach(mano =>mano.contarCartas());           
      }
 
-     function resetearPartida(){       //inicializa las variables
-        mesa = new Mesa
-        maso=new Maso
+     //inicializa las variables
+     function resetearPartida(){       
+      mesa.limpiarMesa()
+      maso=new Maso
+        
         }
         
 
@@ -191,6 +187,16 @@ function pedir(mano){
             iniciarInterface()
         
         }
+function crearBoton(texto){
+  let botonIniciar=document.createElement("h1")
+    botonIniciar.classList.add("botonIniciar")
+    botonIniciar.id="botonIniciar"
+    botonIniciar.innerHTML=texto
+    botonIniciar.addEventListener("click",partidaConsoleBlackJack,false)
+    nodeMesa.appendChild(botonIniciar)
+    animarClase("botonIniciar","bounce")
+}
+    
 
 
 

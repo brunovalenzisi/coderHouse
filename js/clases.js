@@ -148,11 +148,19 @@ class Carta{
 
                         nuevoDiv.classList.add("carta")
                         div.appendChild(nuevoDiv)
-                        
-                    
+                        }   
+                        }
+            limpiarMesa(){
+            nodeMano1.innerHTML = '';
+            nodeMano2.innerHTML = '';
+            nodeMano3.innerHTML = '';
+            nodeMano4.innerHTML = ''; 
+                
+            this.manos.forEach(mano => {mano.alMaso()
+                
+            }); 
+            }                
 
-            }   
-                            }
         }
 
         class Mano{
@@ -166,6 +174,9 @@ class Carta{
                 this.id=id
                 this.cerrada=true
                 
+            }
+            alMaso(){
+                this.cartas=[]
             }
         
 
