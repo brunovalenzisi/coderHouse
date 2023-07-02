@@ -152,11 +152,15 @@ function pedir(mano){
 
 
             function empezarJuego(){    //reparte las cartas y evalua la primera mano
-
-                mesa.entregarCarta(1,maso,true)
+mesa.manos.forEach(mano => {if(!mano.cerrada){
+  mesa.entregarCarta(mano.id,maso,true)
                 setTimeout(() => {
-                mesa.entregarCarta(1,maso,true)    
+                mesa.entregarCarta(mano.id,maso,true)    
                   }, 800);
+}
+  
+});
+                
                   setTimeout(() => {
                     mesa.entregarCarta(4,maso,false)    
                       }, 1600);
@@ -209,11 +213,9 @@ function seleccionarApuesta(mano){
 
 function apostar(apuesta,mano){
   let nodo=document.getElementById(`apuestaMano${mano+1}`)
-  if(mesa.manos[mano].cerada){mesa.manos[mano].abrir()}
+  mesa.manos[mano].abrir()
   mesa.manos[mano].sumarApuesta(apuesta)
-  nodo.innerHTML=mesa.manos[mano].apuestaAbierta + "<br>cdts"
-  
-    
+  nodo.innerHTML=mesa.manos[mano].apuestaAbierta + "<br>Cdts"
   }
   
 
