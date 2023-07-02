@@ -1,6 +1,8 @@
 window.addEventListener("load",pantallaInicial,false)
 let maso;
 let mesa;
+let seleccionApuesta=0
+
 let nodeMesa=document.getElementById("mesa")
 let nodeMano1=document.getElementById("mano1")
 let nodeMano2=document.getElementById("mano2")
@@ -10,6 +12,9 @@ let node10=document.getElementById("apostar10")
 let node100=document.getElementById("apostar100")
 let node500=document.getElementById("apostar500")
 let node1000=document.getElementById("apostar1000")
+let nodeApuestaMano1=document.getElementById("apuestaMano1")
+let nodeApuestaMano2=document.getElementById("apuestaMano2")
+let nodeApuestaMano3=document.getElementById("apuestaMano3")
 
 
 
@@ -26,7 +31,7 @@ crearBoton("Comenzar Partida")
 
 function pedir(mano){
     if(mesa.manos[mano-1].peso<21){
-    mesa.entregarCarta(mano,maso)
+    mesa.entregarCarta(mano,maso,true)
     evaluar();
     resultado(1,mesa.manos[mano-1]);
     }
@@ -96,10 +101,11 @@ function pedir(mano){
 
 
     function plantarse(){   // a partir de aqui, comienza a jugar el programa
-    
+      mesa.manos[3].cartas[0].girar()
     while(mesa.manos[3].peso<17){  // el ciclo termina cuando se cumpla la condicion del reglamneto del juego
-            confirm("La mano del crupier es menor o igual a 17, pide otra carta");
-            mesa.entregarCarta(4,maso);
+            
+            
+            mesa.entregarCarta(4,maso,true);
             evaluar();
             }
             for(let i=0;i<3;i++){
@@ -142,27 +148,27 @@ function pedir(mano){
         function partidaConsoleBlackJack(){          //es la funcion principal del programa
             nodeMesa.removeChild(nodeMesa.lastChild)
             resetearPartida();
-            empezarJuego();
-            
-            /*if(partidaEnProgreso==true){siguienteRonada();} //se utiliza el if para evitar caminos indeseados
-            */}
+            }
 
 
             function empezarJuego(){    //reparte las cartas y evalua la primera mano
 
-                mesa.entregarCarta(1,maso)
+                mesa.entregarCarta(1,maso,true)
                 setTimeout(() => {
-                mesa.entregarCarta(1,maso)    
+                mesa.entregarCarta(1,maso,true)    
                   }, 800);
                   setTimeout(() => {
-                    mesa.entregarCarta(4,maso)    
+                    mesa.entregarCarta(4,maso,false)    
                       }, 1600);
                       setTimeout(() => {
-                        mesa.entregarCarta(4,maso)    
+                        mesa.entregarCarta(4,maso,true)    
                           }, 2400);
-                   
-                evaluar();
-                mesa.manos.forEach(mano => resultado(1,mano));
+                          setTimeout(() => {
+                            evaluar();
+                            mesa.manos.forEach(mano => resultado(1,mano));     
+                              }, 3000);  
+                
+                
                 }
 
 
@@ -194,8 +200,23 @@ function crearBoton(texto){
     botonIniciar.innerHTML=texto
     botonIniciar.addEventListener("click",partidaConsoleBlackJack,false)
     nodeMesa.appendChild(botonIniciar)
-    animarClase("botonIniciar","bounce")
+    animarClase(botonIniciar.id,"bounce")
 }
+
+function seleccionarApuesta(mano){
+  seleccionApuesta=mano
+}
+
+function apostar(apuesta,mano){
+  let nodo=document.getElementById(`apuestaMano${mano+1}`)
+  if(mesa.manos[mano].cerada){mesa.manos[mano].abrir()}
+  mesa.manos[mano].sumarApuesta(apuesta)
+  nodo.innerHTML=mesa.manos[mano].apuestaAbierta + "<br>cdts"
+  
+    
+  }
+  
+
     
 
 

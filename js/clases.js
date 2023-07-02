@@ -70,10 +70,23 @@ class Carta{
         }
         
         girar(){
-            if(this.cara==false){
+            if(this.cara==true){
+            this.cara=false
+            let elemento=document.getElementById(this.id)
+            elemento.style.backgroundImage=`url(${this.srcDorso})`
+            elemento.classList.add("animate__animated")
+            elemento.classList.add("animate__flip")
+            setTimeout(() => {elemento.classList.remove("animate__animated")
+                              elemento.classList.remove("animate__flip")}, 1500);
+              }
+            else if(this.cara==false){
             this.cara=true
-            }
-            else if(this.cara==true){this.cara=false
+            let elemento=document.getElementById(this.id)
+            elemento.style.backgroundImage=`url(${this.srcImagen})`
+            elemento.classList.add("animate__animated")
+            elemento.classList.add("animate__flip")
+            setTimeout(() => {elemento.classList.remove("animate__animated")
+                              elemento.classList.remove("animate__flip")}, 1500);
             }
         }
         }
@@ -84,7 +97,7 @@ class Carta{
     this.manos=[new Mano(1),new Mano(2),new Mano(3),new Mano(4)]
     
     }
-        entregarCarta(mano,baraja){
+        entregarCarta(mano,baraja,cara){
             if(baraja.cartas.length>0){
             let nCartas
             let div
@@ -115,13 +128,22 @@ class Carta{
                }
 
                     let nuevoDiv=document.createElement("div")
-                    nuevoDiv.style.backgroundImage=`url(${nuevaCarta.srcImagen})`
+                    nuevoDiv.setAttribute("id",`${nuevaCarta.id}`)
+                    if(cara){
+                        nuevoDiv.style.backgroundImage=`url(${nuevaCarta.srcImagen})`       
+                    }else if(!cara){
+                        nuevaCarta.cara=false
+                        nuevoDiv.style.backgroundImage=`url(${nuevaCarta.srcDorso})`
+                    }
+                    
                     
                     if(mano==1){
                        nCartas=this.manos[0].cartas.length
                        nuevoDiv.style.left=`${(nCartas-1)*30}%`
                        nuevoDiv.classList.add("animate__animated")    // ToDo:convertir a la funcion animarElemento
                        nuevoDiv.classList.add("animate__backInLeft")
+                       setTimeout(() => {nuevoDiv.classList.remove("animate__animated")
+                                         nuevoDiv.classList.remove("animate__backInLeft")}, 1000);
                        
                     }
                         else if(mano==2){
@@ -129,6 +151,8 @@ class Carta{
                         nuevoDiv.style.left=`${(nCartas-1)*30}%`
                         nuevoDiv.classList.add("animate__animated")
                         nuevoDiv.classList.add("animate__backInDown")
+                        setTimeout(() => {nuevoDiv.classList.remove("animate__animated")
+                                         nuevoDiv.classList.remove("animate__backInDown")}, 1000);
                        
                     }
                     else if(mano==3){
@@ -136,6 +160,8 @@ class Carta{
                         nuevoDiv.style.left=`${(nCartas-1)*30}%`
                         nuevoDiv.classList.add("animate__animated")
                         nuevoDiv.classList.add("animate__backInRight")
+                        setTimeout(() => {nuevoDiv.classList.remove("animate__animated")
+                        nuevoDiv.classList.remove("animate__backInRight")}, 1000);
                         
                     }
                     else if(mano==4){
@@ -143,6 +169,8 @@ class Carta{
                         nuevoDiv.style.left=`${(nCartas-1)*30}%`
                         nuevoDiv.classList.add("animate__animated")
                         nuevoDiv.classList.add("animate__backInDown")
+                        setTimeout(() => {nuevoDiv.classList.remove("animate__animated")
+                        nuevoDiv.classList.remove("animate__backInDown")}, 1000);
                         
                     }
 
@@ -168,11 +196,16 @@ class Carta{
             peso
             id
             cerrada
+            apuestaAbierta
+            apuestaCerrada
+            
             constructor(id){
                 this.cartas=[]
                 this.peso=0
                 this.id=id
                 this.cerrada=true
+                this.apuestaAbierta=0
+                this.apuestaCerrada=0
                 
             }
             alMaso(){
@@ -205,6 +238,10 @@ class Carta{
                 }
                 abrir(){
                     this.cerrada=false
+                }
+
+                sumarApuesta(cantidad){
+this.apuestaAbierta+=cantidad
                 }
             
                 
