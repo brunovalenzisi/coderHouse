@@ -215,10 +215,12 @@ class Carta{
                 
             }
             alMaso(){
+                this.peso=0
                 this.cartas=[]
                 this.apuestaAbierta=0
                 this.apuestaCerrada=0
                 this.cerrada=true
+                this.blackJack=false
 
             }
         

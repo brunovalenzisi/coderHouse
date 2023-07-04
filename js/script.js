@@ -167,7 +167,7 @@ function pedir(mano){
 
 
   function empezarJuego(){    //reparte las cartas y evalua la primera mano
-  if(mesa.manos.some((mano)=>mano.cerrada==false)){
+  if(mesa.manos.some((mano)=>mano.cerrada==false) && !mesa.manos.some((mano)=>mano.peso>0) ){
 
     mesa.manos.forEach(mano => {
       if(!mano.cerrada){
