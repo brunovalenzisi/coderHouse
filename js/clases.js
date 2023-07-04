@@ -92,6 +92,7 @@ class Carta{
         }
     
     class Mesa{
+    cdts=1000    
     manos=[]
     constructor(){
     this.manos=[new Mano(1),new Mano(2),new Mano(3),new Mano(4)]
@@ -182,7 +183,10 @@ class Carta{
             nodeMano1.innerHTML = '';
             nodeMano2.innerHTML = '';
             nodeMano3.innerHTML = '';
-            nodeMano4.innerHTML = ''; 
+            nodeMano4.innerHTML = '';
+            nodeApuestaMano1.innerHTML="0<br>Cdts"
+            nodeApuestaMano2.innerHTML="0<br>Cdts"
+            nodeApuestaMano3.innerHTML="0<br>Cdts" 
                 
             this.manos.forEach(mano => {mano.alMaso()
                 
@@ -196,6 +200,7 @@ class Carta{
             peso
             id
             cerrada
+            blackJack
             apuestaAbierta
             apuestaCerrada
             
@@ -206,10 +211,15 @@ class Carta{
                 this.cerrada=true
                 this.apuestaAbierta=0
                 this.apuestaCerrada=0
+                this.blackJack=false
                 
             }
             alMaso(){
                 this.cartas=[]
+                this.apuestaAbierta=0
+                this.apuestaCerrada=0
+                this.cerrada=true
+
             }
         
 
@@ -242,6 +252,11 @@ class Carta{
 
                 sumarApuesta(cantidad){
 this.apuestaAbierta+=cantidad
+                }
+
+                cerrarApuesta(){
+                    this.apuestaCerrada+=this.apuestaAbierta
+                    this.apuestaAbierta=0
                 }
             
                 
