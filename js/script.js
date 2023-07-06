@@ -15,6 +15,9 @@ let node1000=document.getElementById("apostar1000")
 let nodeApuestaMano1=document.getElementById("apuestaMano1")
 let nodeApuestaMano2=document.getElementById("apuestaMano2")
 let nodeApuestaMano3=document.getElementById("apuestaMano3")
+let nodeCdts=document.getElementById("cdts")
+
+
 
 
 
@@ -23,8 +26,10 @@ let nodeApuestaMano3=document.getElementById("apuestaMano3")
 
 
 function pantallaInicial(){
+
 mesa=new Mesa
 crearBoton("Comenzar Partida")
+actualizarNodeCdts(1000)
 }
 
 
@@ -121,6 +126,7 @@ function pedir(mano){
                                 mesa.cdts+=mano.apuestaCerrada
                                 
                                 }
+                                actualizarNodeCdts()
 
                         crearBoton("Siguiente ronda")        
                     }
@@ -244,8 +250,12 @@ function apostar(apuesta,mano){
   mesa.manos[mano].sumarApuesta(apuesta)
   nodo.innerHTML=mesa.manos[mano].apuestaCerrada + mesa.manos[mano].apuestaAbierta + "<br>Cdts"
   mesa.cdts-=apuesta
+  actualizarNodeCdts()
   }
   
+  function actualizarNodeCdts(){
+nodeCdts.textContent=`${mesa.cdts} cdts`
+  }
 
     
 

@@ -240,4 +240,24 @@
 .mano3{width: 130px;height: 170px;top: 59%;left:72%;position: absolute;transform: rotate(-21deg);cursor: pointer;}
 .mano4{width: 130px;height: 170px;top: 25%;left:46%;position: absolute}
 
+.cdts{width: 250px;
+    height: 70px;
+    top: 2%;
+    left:2%;
+    position: absolute;
+    background-color:darkgoldenrod;
+    border-radius: 30px;
+    border-color: aliceblue;
+    border-style: solid;
+    border-width: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: aliceblue;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+    
+
+
 

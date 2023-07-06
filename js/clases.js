@@ -3,20 +3,20 @@ class Maso {
     cartas=[];
     constructor (joker){
         
-        for(let i=1, c=1;i<14;i++,c++){
-            this.cartas[i-1]=new Carta("picas",c,c,`../cartas/picas/${c}.png`);
+        for(let i=0, c=1;i<13;i++,c++){
+            this.cartas[i]=new Carta("picas",c,c,`./cartas/picas/${c}.png`);
             }
-        for(let i=14,c=1;i<27;i++,c++){
-            this.cartas[i-1]=new Carta("corazones",c,c,`../cartas/corazones/${c}.png`);
+        for(let i=13,c=1;i<26;i++,c++){
+            this.cartas[i]=new Carta("corazones",c,c,`./cartas/corazones/${c}.png`);
             }
-        for(let i=27,c=1;i<40;i++,c++){
-            this.cartas[i-1]=new Carta("diamantes",c,c,`../cartas/diamantes/${c}.png`);
+        for(let i=26,c=1;i<39;i++,c++){
+            this.cartas[i]=new Carta("diamantes",c,c,`./cartas/diamantes/${c}.png`);
             }
-        for(let i=40,c=1;i<53;i++,c++){
-            this.cartas[i-1]=new Carta("trebol",c,c,`../cartas/trebol/${c}.png`);
+        for(let i=39,c=1;i<52;i++,c++){
+            this.cartas[i]=new Carta("trebol",c,c,`./cartas/trebol/${c}.png`);
             }
-        if(joker){this.cartas.push(new Carta("joker","j",100,`../cartas/joker/1.png`))
-                this.cartas.push(new Carta("joker","j",100,`../cartas/joker/1.png`))}
+        if(joker){this.cartas.push(new Carta("joker","j",100,`./cartas/joker/1.png`))
+                this.cartas.push(new Carta("joker","j",100,`./cartas/joker/1.png`))}
          
                     
     }
@@ -40,7 +40,7 @@ class Carta{
         palo
         id
         srcImagen
-        srcDorso="../cartas/joker/2.png"
+        srcDorso="./cartas/joker/2.png"
         valor=[]
         color
         cara=true
@@ -253,7 +253,7 @@ class Carta{
                 }
 
                 sumarApuesta(cantidad){
-this.apuestaAbierta+=cantidad
+                this.apuestaAbierta+=cantidad
                 }
 
                 cerrarApuesta(){
