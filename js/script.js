@@ -32,6 +32,7 @@ crearBoton("Comenzar Partida")
 function pedir(mano){
     if(!mesa.manos[mano-1].cerrada){
     mesa.entregarCarta(mano,maso,true)
+    mesa.manos[mano-1].cerrarApuesta()
     evaluar();
     resultado(1,mesa.manos[mano-1]);
     }
@@ -108,7 +109,10 @@ function pedir(mano){
 
                             else if(mano.peso>mesa.manos[3].peso){
                                 console.log("❤️♠️🔶🍀 Felicitaciones! ganaste la partida! ❤️♠️🔶🍀 paga 1 a 1")
-                                }else if (mano.peso<mesa.manos[3].peso){
+                                mesa.cdts+=(2*mano.apuestaCerrada)
+                                }
+                                
+                                else if (mano.peso<mesa.manos[3].peso){
                                 console.log("💀💀 Perdiste! El crupier sumo mas puntos 💀💀")
                                 mano.alMaso()
                             }
@@ -138,6 +142,7 @@ function pedir(mano){
             evaluar();
             }
             for(let i=0;i<3;i++){
+                mesa.manos[i].cerrarApuesta()
                 resultado(2,mesa.manos[i])
             } // el hecho de que salga del ciclo implica el fin definitivo de la mano actual
         }
@@ -151,7 +156,8 @@ function pedir(mano){
      }
 
      //inicializa las variables
-     function resetearPartida(){       
+     function resetearPartida(){ 
+            
       mesa.limpiarMesa()
       maso=new Maso
         
