@@ -3,6 +3,7 @@ let maso;
 let mesa;
 let seleccionApuesta=0
 
+
 let nodeMesa=document.getElementById("mesa")
 let nodeMano1=document.getElementById("mano1")
 let nodeMano2=document.getElementById("mano2")
@@ -36,6 +37,7 @@ actualizarNodeCdts(1000)
 
 function pedir(mano){
     if(!mesa.manos[mano-1].cerrada){
+    mesa.manos[mano-1].puedeDoblar=false   
     mesa.entregarCarta(mano,maso,true)
     mesa.manos[mano-1].cerrarApuesta()
     evaluar();
@@ -128,7 +130,7 @@ function pedir(mano){
                                 }
                                 actualizarNodeCdts()
 
-                        crearBoton("Siguiente ronda")        
+                        if(!document.getElementById("botonIniciar")){crearBoton("Siguiente ronda")}   
                     }
                             
     
@@ -163,7 +165,7 @@ function pedir(mano){
 
      //inicializa las variables
      function resetearPartida(){ 
-            
+      mesa.abrir()     
       mesa.limpiarMesa()
       maso=new Maso
         
@@ -179,10 +181,12 @@ function pedir(mano){
 
 
   function empezarJuego(){    //reparte las cartas y evalua la primera mano
+    
   if(mesa.manos.some((mano)=>mano.cerrada==false) && !mesa.manos.some((mano)=>mano.peso>0) ){
-
+    mesa.cerrar()
     mesa.manos.forEach(mano => {
       if(!mano.cerrada){
+      mano.puedeDoblar=true  
       mano.cerrarApuesta()
       mesa.entregarCarta(mano.id,maso,true)
                     setTimeout(() => {
@@ -245,19 +249,34 @@ function seleccionarApuesta(mano){
 }
 
 function apostar(apuesta,mano){
-  let nodo=document.getElementById(`apuestaMano${mano+1}`)
-  mesa.manos[mano].abrir()
-  mesa.manos[mano].sumarApuesta(apuesta)
-  nodo.innerHTML=mesa.manos[mano].apuestaCerrada + mesa.manos[mano].apuestaAbierta + "<br>Cdts"
-  mesa.cdts-=apuesta
-  actualizarNodeCdts()
+  if(mesa.cdts>=apuesta && mesa.manos[mano].apuestaCerrada==0 && mesa.abierta){
+    let nodo=document.getElementById(`apuestaMano${mano+1}`)
+    mesa.manos[mano].abrir()
+    mesa.manos[mano].sumarApuesta(apuesta)
+    nodo.innerHTML=mesa.manos[mano].apuestaCerrada + mesa.manos[mano].apuestaAbierta + "<br>Cdts"
+    actualizarNodeCdts()
   }
   
-  function actualizarNodeCdts(){
-nodeCdts.textContent=`${mesa.cdts} cdts`
   }
 
-    
+
+ function doblar(mano){
+  if(mesa.manos[mano].puedeDoblar){
+    mesa.manos[seleccionApuesta].doblarApuesta()
+    let nodo=document.getElementById(`apuestaMano${mano+1}`)
+    nodo.innerHTML=mesa.manos[mano].apuestaCerrada + mesa.manos[mano].apuestaAbierta + "<br>Cdts"
+    actualizarNodeCdts()
+    pedir(mano+1)
+    mesa.manos[mano].cerrar()
+    resultado(1,mano-1)
+  
+  }
+  
+ } 
+
+ function actualizarNodeCdts(){
+  nodeCdts.textContent=`${mesa.cdts} cdts`
+    }
 
 
 

@@ -94,9 +94,10 @@ class Carta{
     class Mesa{
     cdts=1000    
     manos=[]
+    abierta
     constructor(){
     this.manos=[new Mano(1),new Mano(2),new Mano(3),new Mano(4)]
-    
+    this.abierta=true
     }
         entregarCarta(mano,baraja,cara){
             if(baraja.cartas.length>0){
@@ -192,7 +193,8 @@ class Carta{
                 
             }); 
             }                
-
+abrir(){this.abierta=true}
+cerrar(){this.abierta=false}
         }
 
         class Mano{
@@ -203,6 +205,7 @@ class Carta{
             blackJack
             apuestaAbierta
             apuestaCerrada
+            puedeDoblar
             
             constructor(id){
                 this.cartas=[]
@@ -254,11 +257,17 @@ class Carta{
 
                 sumarApuesta(cantidad){
                 this.apuestaAbierta+=cantidad
+                mesa.cdts-=cantidad
                 }
 
                 cerrarApuesta(){
                     this.apuestaCerrada+=this.apuestaAbierta
                     this.apuestaAbierta=0
+                }
+
+                doblarApuesta(){
+                this.apuestaCerrada=2*this.apuestaCerrada
+                mesa.cdts-=this.apuestaCerrada
                 }
             
                 

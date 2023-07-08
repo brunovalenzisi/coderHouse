@@ -42,7 +42,35 @@
     
 }
 
+.botonesDirectores{
+    margin-left: 10%;
+    display: flex;
+    justify-content: center;
+    width: 1000px;
+    height: 50px;
+    
+}
+
 .botonDeal{
+    cursor: pointer;
+    font-size: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: beige;
+    width: 250px;
+    height: 60px;
+    margin-left: 4%;
+    border-radius: 50px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: beige;
+    background-color:darkgreen;
+    
+}
+
+.botonDoblar{
     cursor: pointer;
     background-color:darkgreen;
     font-size: 30px;
@@ -53,16 +81,17 @@
     color: beige;
     width: 250px;
     height: 60px;
-    position: absolute;
+    margin-left: 4%;   
     border-radius: 50px;
     border-style: solid;
     border-width: 1px;
     border-color: beige;
-    left: 40%;
+ 
     
 }
 
 .botonPlantarse{
+    margin-left: 4%;
     cursor: pointer;
     background-color:darkgreen;
     font-size: 30px;
@@ -73,12 +102,11 @@
     color: beige;
     width: 250px;
     height: 60px;
-    position: absolute;
     border-radius: 50px;
     border-style: solid;
     border-width: 1px;
     border-color: beige;
-    left: 70%;
+    
     
 }
 
@@ -173,6 +201,7 @@
     position: absolute;
     bottom: 1%;
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 
