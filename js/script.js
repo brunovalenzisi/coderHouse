@@ -41,7 +41,7 @@ function pedir(mano){
     mesa.entregarCarta(mano,maso,true)
     mesa.manos[mano-1].cerrarApuesta()
     evaluar();
-    resultado(1,mesa.manos[mano-1]);
+    resultadoParcial(mesa.manos[mano-1]);
     }
     
     }
@@ -68,10 +68,10 @@ function pedir(mano){
 
 
  // evalua la situacion de la partida en diferentes estados de la misma, se utiliza el parametro jugador para definir estos estados.
-    function resultado(jugador,mano){
+    function resultadoParcial(mano){
         let manosCerradas=0 
         if(mano.id<4 && mano.peso>0){ 
-        if (jugador==1){if(mano.cartas.length==2 && mano.peso==21){
+        if(mano.cartas.length==2 && mano.peso==21){
           console.log("BLACK JACK");
           mano.blackJack=true
             mano.cerrar()     
@@ -86,74 +86,76 @@ function pedir(mano){
                     
                   mesa.manos.forEach(mano => {if(mano.cerrada){manosCerradas++}
                   });
-                  if(manosCerradas==4){plantarse()}
-                  }
+                  if(manosCerradas==4){resultadoFinal()}
+        }
+      }
+                  
+        
                     
-                    else if(jugador==2){
-                      if(mano.peso>21){
-                        console.log("💀💀 Perdiste! sumaste mas de 21 puntos 💀💀")
-                        mano.alMaso()
-                        }
-                        else if(mano.blackJack && !mesa.manos[3].blackJack){
-                          console.log(" ❤️♠️🔶🍀 Felicitaciones! conseguiste un blackJack y ganaste la partida! paga 3 a 2 ❤️♠️🔶🍀")
-                          mesa.cdts+=(mano.apuestaCerrada+mano.apuestaCerrada*2.5)
-                        }
-                        else if(mano.blackJack && mesa.manos[3].blackJack){
-                          console.log(" ❤️♠️🔶🍀 Felicitaciones! conseguiste un blackJack y ganaste la partida! paga 1 a 1 ❤️♠️🔶🍀")
-                          mesa.cdts+=(2*mano.apuestaCerrada)
-                        }
-
-                        else if(mesa.manos[3].peso>21 && mano.peso<=21){
-                            console.log("El crupier se paso")
-                            console.log(" ❤️♠️🔶🍀 Felicitaciones! ganaste la partida! paga 1 a 1 ❤️♠️🔶🍀")
+                    function resultadoFinal(){
+                      jugadaCrupier()
+                      mesa.manos.forEach(mano => {
+                        if(mano.id<4 && mano.peso>0){
+                          if(mano.peso>21){
+                          console.log("💀💀 Perdiste! sumaste mas de 21 puntos 💀💀")
+                          }
+                          else if(mano.blackJack && !mesa.manos[3].blackJack){
+                            console.log(" ❤️♠️🔶🍀 Felicitaciones! conseguiste un blackJack y ganaste la partida! paga 3 a 2 ❤️♠️🔶🍀")
+                            mesa.cdts+=(mano.apuestaCerrada+mano.apuestaCerrada*2.5)
+                          }
+                          else if(mano.blackJack && mesa.manos[3].blackJack){
+                            console.log(" ❤️♠️🔶🍀 Felicitaciones! conseguiste un blackJack y ganaste la partida! paga 1 a 1 ❤️♠️🔶🍀")
                             mesa.cdts+=(2*mano.apuestaCerrada)
+                          }
+  
+                          else if(mesa.manos[3].peso>21 && mano.peso<=21){
+                              console.log("El crupier se paso")
+                              console.log(" ❤️♠️🔶🍀 Felicitaciones! ganaste la partida! paga 1 a 1 ❤️♠️🔶🍀")
+                              mesa.cdts+=(2*mano.apuestaCerrada)
+                               }
+  
+                               else if(mesa.manos[3].peso>21 && mano.peso>21){
+                                console.log("💀💀los dos se pasaron pero perdiste💀💀")
                              }
-
-                             else if(mesa.manos[3].peso>21 && mano.peso>21){
-                              console.log("💀💀los dos se pasaron pero perdiste💀💀")
-                              mano.alMaso()
-                              }
-
-                            else if(mano.peso>mesa.manos[3].peso){
-                                console.log("❤️♠️🔶🍀 Felicitaciones! ganaste la partida! ❤️♠️🔶🍀 paga 1 a 1")
-                                mesa.cdts+=(2*mano.apuestaCerrada)
-                                }
-                                
-                                else if (mano.peso<mesa.manos[3].peso){
-                                console.log("💀💀 Perdiste! El crupier sumo mas puntos 💀💀")
-                                mano.alMaso()
-                            }
-                            else if(mano.peso==mesa.manos[3].peso){
-                                console.log("😐La partida resulto en empate😐");
-                                mesa.cdts+=mano.apuestaCerrada
-                                
-                                }
-                                actualizarNodeCdts()
-
-                        if(!document.getElementById("botonIniciar")){crearBoton("Siguiente ronda")}   
+  
+                              else if(mano.peso>mesa.manos[3].peso){
+                                  console.log("❤️♠️🔶🍀 Felicitaciones! ganaste la partida! ❤️♠️🔶🍀 paga 1 a 1")
+                                  mesa.cdts+=(2*mano.apuestaCerrada)
+                                  }
+                                  
+                                  else if (mano.peso<mesa.manos[3].peso){
+                                  console.log("💀💀 Perdiste! El crupier sumo mas puntos 💀💀")
+                                 }
+                              else if(mano.peso==mesa.manos[3].peso){
+                                  console.log("😐La partida resulto en empate😐");
+                                  mesa.cdts+=mano.apuestaCerrada
+                                  }
+                        }
+                       });
+                      
+                      actualizarNodeCdts()
+                     if(!document.getElementById("botonIniciar")){crearBoton("Siguiente ronda")}   
                     }
                             
-    
-                    }
+    function plantarse(mano){
+      mesa.manos[mano].cerrar()
+      resultadoParcial(mesa.manos[mano])
     }
+                    
+    
 
 
-    function plantarse(){   // a partir de aqui, comienza a jugar el programa
+    function jugadaCrupier(){   // a partir de aqui, comienza a jugar el programa
       mesa.manos[3].cartas[0].girar()
       if(mesa.manos[3].peso==21){
         mesa.manos[3].blackJack=true
       }
     while(mesa.manos[3].peso<17){  // el ciclo termina cuando se cumpla la condicion del reglamneto del juego
-            
-            
             mesa.entregarCarta(4,maso,true);
             evaluar();
             }
-            for(let i=0;i<3;i++){
-                mesa.manos[i].cerrarApuesta()
-                resultado(2,mesa.manos[i])
-            } // el hecho de que salga del ciclo implica el fin definitivo de la mano actual
         }
+        
    
    
 
@@ -204,7 +206,7 @@ function pedir(mano){
                               }, 2400);
                               setTimeout(() => {
                                 evaluar();
-                                mesa.manos.forEach(mano => resultado(1,mano));     
+                                mesa.manos.forEach(mano => resultadoParcial(mano));     
                                   }, 3000);  
   }
 
@@ -268,7 +270,7 @@ function apostar(apuesta,mano){
     actualizarNodeCdts()
     pedir(mano+1)
     mesa.manos[mano].cerrar()
-    resultado(1,mano-1)
+    resultadoParcial(mesa.manos[mano])
   
   }
   
