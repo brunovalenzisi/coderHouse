@@ -36,7 +36,7 @@ actualizarNodeCdts(1000)
 
 
 function pedir(mano){
-    if(!mesa.manos[mano-1].cerrada){
+    if(!mesa.manos[mano-1].cerrada && mesa.abierta){
     mesa.manos[mano-1].puedeDoblar=false   
     mesa.entregarCarta(mano,maso,true)
     mesa.manos[mano-1].cerrarApuesta()
@@ -93,6 +93,7 @@ function pedir(mano){
         
                     
                     function resultadoFinal(){
+                      mesa.cerrar()
                       jugadaCrupier()
                       mesa.manos.forEach(mano => {
                         if(mano.id<4 && mano.peso>0){
@@ -138,8 +139,14 @@ function pedir(mano){
                     }
                             
     function plantarse(mano){
-      mesa.manos[mano].cerrar()
-      resultadoParcial(mesa.manos[mano])
+      if(mesa.abierta){
+        if(!mesa.manos[mano].cerrada){
+          mesa.manos[mano].cerrar()
+          resultadoParcial(mesa.manos[mano])
+          }
+        
+      }
+      
     }
                     
     
@@ -167,7 +174,7 @@ function pedir(mano){
 
      //inicializa las variables
      function resetearPartida(){ 
-      mesa.abrir()     
+      mesa.cerrar()     
       mesa.limpiarMesa()
       maso=new Maso
         
@@ -183,9 +190,9 @@ function pedir(mano){
 
 
   function empezarJuego(){    //reparte las cartas y evalua la primera mano
-    
+   
   if(mesa.manos.some((mano)=>mano.cerrada==false) && !mesa.manos.some((mano)=>mano.peso>0) ){
-    mesa.cerrar()
+    mesa.abrir()
     mesa.manos.forEach(mano => {
       if(!mano.cerrada){
       mano.puedeDoblar=true  
@@ -251,7 +258,7 @@ function seleccionarApuesta(mano){
 }
 
 function apostar(apuesta,mano){
-  if(mesa.cdts>=apuesta && mesa.manos[mano].apuestaCerrada==0 && mesa.abierta){
+  if(mesa.cdts>=apuesta && mesa.manos[mano].apuestaCerrada==0 && !mesa.abierta){
     let nodo=document.getElementById(`apuestaMano${mano+1}`)
     mesa.manos[mano].abrir()
     mesa.manos[mano].sumarApuesta(apuesta)
@@ -263,7 +270,7 @@ function apostar(apuesta,mano){
 
 
  function doblar(mano){
-  if(mesa.manos[mano].puedeDoblar){
+  if(mesa.manos[mano].puedeDoblar && mesa.abierta){
     mesa.manos[seleccionApuesta].doblarApuesta()
     let nodo=document.getElementById(`apuestaMano${mano+1}`)
     nodo.innerHTML=mesa.manos[mano].apuestaCerrada + mesa.manos[mano].apuestaAbierta + "<br>Cdts"
@@ -271,8 +278,7 @@ function apostar(apuesta,mano){
     pedir(mano+1)
     mesa.manos[mano].cerrar()
     resultadoParcial(mesa.manos[mano])
-  
-  }
+    }
   
  } 
 

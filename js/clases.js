@@ -97,7 +97,7 @@ class Carta{
     abierta
     constructor(){
     this.manos=[new Mano(1),new Mano(2),new Mano(3),new Mano(4)]
-    this.abierta=true
+    this.abierta=false
     }
         entregarCarta(mano,baraja,cara){
             if(baraja.cartas.length>0){
@@ -268,6 +268,7 @@ cerrar(){this.abierta=false}
                 doblarApuesta(){
                 this.apuestaCerrada=2*this.apuestaCerrada
                 mesa.cdts-=this.apuestaCerrada
+                this.puedeDoblar=false
                 }
             
                 
