@@ -289,4 +289,37 @@
     
 
 
+.puntero0{
+    transform: rotate(23deg);
+    background-image: url("../mesa/puntero.png");
+    width: 90px;
+    height: 90px;
+    left: 26%;
+    top: 44%;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
 
+.puntero1{
+    background-image: url("../mesa/puntero.png");
+    width: 90px;
+    height: 90px;
+    left: 47.3%;
+    top: 51%;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.puntero2{
+    transform: rotate(-23deg);
+    background-image: url("../mesa/puntero.png");
+    width: 90px;
+    height: 90px;
+    left: 69.5%;
+    top: 43.5%;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}

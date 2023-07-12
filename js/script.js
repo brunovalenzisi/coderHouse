@@ -185,6 +185,7 @@ function pedir(mano){
         function partidaConsoleBlackJack(){          //es la funcion principal del programa
             
             nodeMesa.removeChild(nodeMesa.lastChild)
+            crearPuntero(0)
             resetearPartida();
             }
 
@@ -254,7 +255,11 @@ function crearBoton(texto){
 }
 
 function seleccionarApuesta(mano){
-  seleccionApuesta=mano
+  if(!mesa.abierta){
+    crearPuntero(mano)
+    seleccionApuesta=mano
+  }
+  
 }
 
 function apostar(apuesta,mano){
@@ -270,20 +275,33 @@ function apostar(apuesta,mano){
 
 
  function doblar(mano){
-  if(mesa.manos[mano].puedeDoblar && mesa.abierta){
+  if(mesa.manos[mano].puedeDoblar && mesa.abierta && mesa.manos[mano].apuestaCerrada*2<=mesa.cdts){
     mesa.manos[seleccionApuesta].doblarApuesta()
     let nodo=document.getElementById(`apuestaMano${mano+1}`)
     nodo.innerHTML=mesa.manos[mano].apuestaCerrada + mesa.manos[mano].apuestaAbierta + "<br>Cdts"
     actualizarNodeCdts()
     pedir(mano+1)
-    mesa.manos[mano].cerrar()
-    resultadoParcial(mesa.manos[mano])
-    }
+    plantarse(mano)
+   }
   
  } 
 
  function actualizarNodeCdts(){
   nodeCdts.textContent=`${mesa.cdts} cdts`
+    }
+
+    function crearPuntero(mano){
+      if(document.getElementById("puntero")){
+        let punteroViejo=document.getElementById("puntero")
+        nodeMesa.removeChild(punteroViejo)
+}
+      let puntero=document.createElement("div")
+      puntero.classList.add(`puntero${mano}`)
+      puntero.id="puntero"
+      nodeMesa.appendChild(puntero)
+      puntero.classList.add("animate__animated")
+      puntero.classList.add("animate__bounce")
+      puntero.classList.add("animate__infinite")
     }
 
 
