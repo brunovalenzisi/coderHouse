@@ -36,7 +36,7 @@ actualizarNodeCdts(1000)
 
 
 function pedir(mano){
-    if(!mesa.manos[mano-1].cerrada && mesa.abierta){
+    if(!mesa.manos[mano-1].cerrada && mesa.abierta && mesa.enJuego){
     mesa.manos[mano-1].puedeDoblar=false   
     mesa.entregarCarta(mano,maso,true)
     mesa.manos[mano-1].cerrarApuesta()
@@ -74,14 +74,17 @@ function pedir(mano){
         if(mano.cartas.length==2 && mano.peso==21){
           console.log("BLACK JACK");
           mano.blackJack=true
-            mano.cerrar()     
-            }  else
+            mano.cerrar()
+            siguiente()
+           }  else
                 if(mano.peso==21){
                     console.log("Conseguiste 21 puntos, te plantas");
-                    mano.cerrar() 
+                    mano.cerrar()
+                    siguiente()
                     }
                   else if(mano.peso>21){
-                    mano.cerrar() 
+                    mano.cerrar()
+                    siguiente()
                     }
                     
                   mesa.manos.forEach(mano => {if(mano.cerrada){manosCerradas++}
@@ -132,17 +135,22 @@ function pedir(mano){
                                   mesa.cdts+=mano.apuestaCerrada
                                   }
                         }
+                        
                        });
-                      
+                       
                       actualizarNodeCdts()
-                     if(!document.getElementById("botonIniciar")){crearBoton("Siguiente ronda")}   
+                      mesa.terminarRonda()
+                      nodeMesa.removeChild(document.getElementById("puntero"))
+                     if(!document.getElementById("botonIniciar")){crearBoton("Siguiente ronda")}
+                         
                     }
                             
     function plantarse(mano){
-      if(mesa.abierta){
+      if(mesa.abierta && mesa.enJuego){
         if(!mesa.manos[mano].cerrada){
           mesa.manos[mano].cerrar()
           resultadoParcial(mesa.manos[mano])
+          siguiente()
           }
         
       }
@@ -184,15 +192,18 @@ function pedir(mano){
 
         function partidaConsoleBlackJack(){          //es la funcion principal del programa
             
-            nodeMesa.removeChild(nodeMesa.lastChild)
-            crearPuntero(0)
+            nodeMesa.removeChild(document.getElementById("botonIniciar"))
+            mesa.empezarRonda()
+            seleccionarApuesta(0)
             resetearPartida();
             }
 
 
   function empezarJuego(){    //reparte las cartas y evalua la primera mano
    
-  if(mesa.manos.some((mano)=>mano.cerrada==false) && !mesa.manos.some((mano)=>mano.peso>0) ){
+  if(mesa.manos.some((mano)=>mano.cerrada==false) && !mesa.manos.some((mano)=>mano.peso>0) && mesa.enJuego ){
+   seleccionarApuesta(0)
+    crearPuntero(seleccionApuesta)
     mesa.abrir()
     mesa.manos.forEach(mano => {
       if(!mano.cerrada){
@@ -255,15 +266,23 @@ function crearBoton(texto){
 }
 
 function seleccionarApuesta(mano){
-  if(!mesa.abierta){
+  if(!mesa.abierta && mesa.enJuego){
     crearPuntero(mano)
     seleccionApuesta=mano
   }
+
   
 }
 
+function siguiente(){
+  do{
+    seleccionApuesta++
+    crearPuntero(seleccionApuesta)
+  } while(seleccionApuesta<2 && mesa.manos[seleccionApuesta].apuestaCerrada==0)
+  }
+
 function apostar(apuesta,mano){
-  if(mesa.cdts>=apuesta && mesa.manos[mano].apuestaCerrada==0 && !mesa.abierta){
+  if(mesa.cdts>=apuesta && mesa.manos[mano].apuestaCerrada==0 && !mesa.abierta && mesa.enJuego){
     let nodo=document.getElementById(`apuestaMano${mano+1}`)
     mesa.manos[mano].abrir()
     mesa.manos[mano].sumarApuesta(apuesta)

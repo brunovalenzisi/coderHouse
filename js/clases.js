@@ -95,9 +95,11 @@ class Carta{
     cdts=1000    
     manos=[]
     abierta
+    enJuego
     constructor(){
     this.manos=[new Mano(1),new Mano(2),new Mano(3),new Mano(4)]
     this.abierta=false
+    this.enJuego=false
     }
         entregarCarta(mano,baraja,cara){
             if(baraja.cartas.length>0){
@@ -195,6 +197,8 @@ class Carta{
             }                
 abrir(){this.abierta=true}
 cerrar(){this.abierta=false}
+empezarRonda(){this.enJuego=true}
+terminarRonda(){this.enJuego=false}
         }
 
         class Mano{
