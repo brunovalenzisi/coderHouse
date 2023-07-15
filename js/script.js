@@ -89,7 +89,11 @@ function pedir(mano){
                     
                   mesa.manos.forEach(mano => {if(mano.cerrada){manosCerradas++}
                   });
-                  if(manosCerradas==4){resultadoFinal()}
+                  if(manosCerradas==4){
+                    setTimeout(() => {
+                      nodeMesa.removeChild(document.getElementById("puntero"))
+                        }, 2);
+                    resultadoFinal()}
         }
       }
                   
@@ -140,10 +144,9 @@ function pedir(mano){
                        
                       actualizarNodeCdts()
                       mesa.terminarRonda()
-                      nodeMesa.removeChild(document.getElementById("puntero"))
-                     if(!document.getElementById("botonIniciar")){crearBoton("Siguiente ronda")}
-                         
-                    }
+                      if(!document.getElementById("botonIniciar")){crearBoton("Siguiente ronda")}
+                      
+                      }
                             
     function plantarse(mano){
       if(mesa.abierta && mesa.enJuego){
@@ -202,9 +205,7 @@ function pedir(mano){
   function empezarJuego(){    //reparte las cartas y evalua la primera mano
    
   if(mesa.manos.some((mano)=>mano.cerrada==false) && !mesa.manos.some((mano)=>mano.peso>0) && mesa.enJuego ){
-   seleccionarApuesta(0)
-    crearPuntero(seleccionApuesta)
-    mesa.abrir()
+   mesa.abrir()
     mesa.manos.forEach(mano => {
       if(!mano.cerrada){
       mano.puedeDoblar=true  
@@ -225,12 +226,15 @@ function pedir(mano){
                               }, 2400);
                               setTimeout(() => {
                                 evaluar();
-                                mesa.manos.forEach(mano => resultadoParcial(mano));     
-                                  }, 3000);  
+                               }, 3000);  
+
+                               seleccionApuesta=(mesa.manos.find((mano)=>mano.apuestaCerrada>0)).id-1
+                               seleccionarApuesta(seleccionApuesta)
+                               crearPuntero(seleccionApuesta)          
+                                resultadoParcial(mesa.manos[seleccionApuesta])
   }
 
-                
-                
+              
                 }
 
 
@@ -275,11 +279,14 @@ function seleccionarApuesta(mano){
 }
 
 function siguiente(){
-  do{
-    seleccionApuesta++
-    crearPuntero(seleccionApuesta)
-  } while(seleccionApuesta<2 && mesa.manos[seleccionApuesta].apuestaCerrada==0)
+
+    do{
+      seleccionApuesta++
+      crearPuntero(seleccionApuesta)
+    } while(seleccionApuesta<2 && mesa.manos[seleccionApuesta].apuestaCerrada==0)
   }
+  
+  
 
 function apostar(apuesta,mano){
   if(mesa.cdts>=apuesta && mesa.manos[mano].apuestaCerrada==0 && !mesa.abierta && mesa.enJuego){
