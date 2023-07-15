@@ -78,9 +78,11 @@ function pedir(mano){
                 if(mano.peso==21){
                     console.log("Conseguiste 21 puntos, te plantas");
                     mano.cerrar()
+                    siguiente()
                     }
                   else if(mano.peso>21){
                     mano.cerrar()
+                    siguiente()
                     }
                     
                   mesa.manos.forEach(mano => {if(mano.cerrada){manosCerradas++}
