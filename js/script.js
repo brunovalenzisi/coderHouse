@@ -40,7 +40,7 @@ function pedir(mano){
     mesa.manos[mano-1].puedeDoblar=false   
     mesa.entregarCarta(mano,maso,true)
     mesa.manos[mano-1].cerrarApuesta()
-    evaluar();
+    mesa.manos[mano-1].contarCartas(21);
     resultadoParcial(mesa.manos[mano-1]);
     }
     
@@ -72,19 +72,15 @@ function pedir(mano){
         let manosCerradas=0 
         if(mano.id<4 && mano.peso>0){ 
         if(mano.cartas.length==2 && mano.peso==21){
-          console.log("BLACK JACK");
-          mano.blackJack=true
+            mano.blackJack=true
             mano.cerrar()
-            siguiente()
-           }  else
+            }  else
                 if(mano.peso==21){
                     console.log("Conseguiste 21 puntos, te plantas");
                     mano.cerrar()
-                    siguiente()
                     }
                   else if(mano.peso>21){
                     mano.cerrar()
-                    siguiente()
                     }
                     
                   mesa.manos.forEach(mano => {if(mano.cerrada){manosCerradas++}
@@ -122,11 +118,7 @@ function pedir(mano){
                               mesa.cdts+=(2*mano.apuestaCerrada)
                                }
   
-                               else if(mesa.manos[3].peso>21 && mano.peso>21){
-                                console.log("💀💀los dos se pasaron pero perdiste💀💀")
-                             }
-  
-                              else if(mano.peso>mesa.manos[3].peso){
+                       else if(mano.peso>mesa.manos[3].peso){
                                   console.log("❤️♠️🔶🍀 Felicitaciones! ganaste la partida! ❤️♠️🔶🍀 paga 1 a 1")
                                   mesa.cdts+=(2*mano.apuestaCerrada)
                                   }
@@ -170,7 +162,7 @@ function pedir(mano){
       }
     while(mesa.manos[3].peso<17){  // el ciclo termina cuando se cumpla la condicion del reglamneto del juego
             mesa.entregarCarta(4,maso,true);
-            evaluar();
+            mesa.manos[3].contarCartas(17);
             }
         }
         
@@ -178,10 +170,8 @@ function pedir(mano){
    
 
 
-         //actualiza las variables
-    function evaluar(){ 
-    mesa.manos.forEach(mano =>mano.contarCartas());           
-     }
+       
+   
 
      //inicializa las variables
      function resetearPartida(){ 
@@ -212,7 +202,8 @@ function pedir(mano){
       mano.cerrarApuesta()
       mesa.entregarCarta(mano.id,maso,true)
                     setTimeout(() => {
-                    mesa.entregarCarta(mano.id,maso,true)    
+                    mesa.entregarCarta(mano.id,maso,true);
+                    mano.contarCartas(21)    
                       }, 800);
     }
       
@@ -225,7 +216,7 @@ function pedir(mano){
                             mesa.entregarCarta(4,maso,true)    
                               }, 2400);
                               setTimeout(() => {
-                                evaluar();
+                                
                                }, 3000);  
 
                                seleccionApuesta=(mesa.manos.find((mano)=>mano.apuestaCerrada>0)).id-1

@@ -232,7 +232,7 @@ terminarRonda(){this.enJuego=false}
             }
         
 
-            contarCartas(){  //funcion auxiliar de evaluar, suma los puntos de una mano deseada
+            contarCartas(limite){  //funcion auxiliar de evaluar, suma los puntos de una mano deseada
                 let cantidadDeAs=0
                 let acumulado=0
                 for(let i=0;i<this.cartas.length;i++){
@@ -244,7 +244,7 @@ terminarRonda(){this.enJuego=false}
                
             if(cantidadDeAs>0){   //elvalua los 1 y les da el valor adecuado a la mano actual
                 for(let i =0;i<cantidadDeAs;i++){
-                    if(acumulado+11+cantidadDeAs-1<=21){
+                    if(acumulado+11+cantidadDeAs-1<=limite){
                         acumulado+=11
                     }else{acumulado++}
                 }
