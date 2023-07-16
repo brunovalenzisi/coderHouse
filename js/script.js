@@ -91,6 +91,7 @@ function pedir(mano){
                     setTimeout(() => {
                       nodeMesa.removeChild(document.getElementById("puntero"))
                         }, 2);
+                        
                     resultadoFinal()}
         }
       }
@@ -195,7 +196,7 @@ function pedir(mano){
 
 
   function empezarJuego(){    //reparte las cartas y evalua la primera mano
-   
+    nodeMesa.removeChild(document.getElementById("puntero"))
   if(mesa.manos.some((mano)=>mano.cerrada==false) && !mesa.manos.some((mano)=>mano.peso>0) && mesa.enJuego ){
    mesa.abrir()
     mesa.manos.forEach(mano => {
@@ -220,10 +221,9 @@ function pedir(mano){
                               setTimeout(() => {
                                 
                                }, 3000);  
-
-                               seleccionApuesta=(mesa.manos.find((mano)=>mano.apuestaCerrada>0)).id-1
-                               seleccionarApuesta(seleccionApuesta)
-                               resultadoParcial(mesa.manos[seleccionApuesta])
+                            seleccionApuesta= mesa.manos.find((mano)=>mano.apuestaCerrada>0).id-1
+                            crearPuntero(seleccionApuesta)
+                            resultadoParcial(mesa.manos[seleccionApuesta])
   }
 
               
@@ -296,7 +296,7 @@ function apostar(apuesta,mano){
   if(mesa.manos[mano].puedeDoblar && mesa.abierta && mesa.manos[mano].apuestaCerrada*2<=mesa.cdts){
     mesa.manos[seleccionApuesta].doblarApuesta()
     let nodo=document.getElementById(`apuestaMano${mano+1}`)
-    nodo.innerHTML=mesa.manos[mano].apuestaCerrada + "<br>Cdts"
+    nodo.innerHTML=mesa.manos[mano].apuestaCerrada + mesa.manos[mano].apuestaAbierta + "<br>Cdts"
     actualizarNodeCdts()
     pedir(mano+1)
     plantarse(mano)
@@ -321,6 +321,8 @@ function apostar(apuesta,mano){
       puntero.classList.add("animate__bounce")
       puntero.classList.add("animate__infinite")
     }
+
+    
 
 
 
