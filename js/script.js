@@ -40,7 +40,7 @@ function pedir(mano){
     mesa.manos[mano-1].puedeDoblar=false   
     mesa.entregarCarta(mano,maso,true)
     mesa.manos[mano-1].cerrarApuesta()
-    mesa.manos[mano-1].contarCartas(21);
+    mesa.manos[mano-1].contarCartas();
     resultadoParcial(mesa.manos[mano-1]);
     }
     
@@ -165,7 +165,7 @@ function pedir(mano){
       }
     while(mesa.manos[3].peso<17){  // el ciclo termina cuando se cumpla la condicion del reglamneto del juego
             mesa.entregarCarta(4,maso,true);
-            mesa.manos[3].contarCartas(17);
+            mesa.manos[3].contarCartas();
             }
         }
         
@@ -206,7 +206,7 @@ function pedir(mano){
       mesa.entregarCarta(mano.id,maso,true)
                     setTimeout(() => {
                     mesa.entregarCarta(mano.id,maso,true);
-                    mano.contarCartas(21)    
+                    mano.contarCartas()    
                       }, 800);
     }
       
@@ -216,11 +216,10 @@ function pedir(mano){
                         mesa.entregarCarta(4,maso,false)    
                           }, 1600);
                           setTimeout(() => {
-                            mesa.entregarCarta(4,maso,true)    
+                            mesa.entregarCarta(4,maso,true)
+                            mesa.manos[3].contarCartas()    
                               }, 2400);
-                              setTimeout(() => {
-                                
-                               }, 3000);  
+                      
                             seleccionApuesta= mesa.manos.find((mano)=>mano.apuestaCerrada>0).id-1
                             crearPuntero(seleccionApuesta)
                             resultadoParcial(mesa.manos[seleccionApuesta])
