@@ -270,9 +270,9 @@ terminarRonda(){this.enJuego=false}
                 }
 
                 doblarApuesta(){
-                this.apuestaCerrada=2*this.apuestaCerrada
-                mesa.cdts-=this.apuestaCerrada
-                this.puedeDoblar=false
+                    mesa.cdts-=this.apuestaCerrada
+                    this.apuestaCerrada=2*this.apuestaCerrada
+                    this.puedeDoblar=false
                 }
             
                 

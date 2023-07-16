@@ -107,7 +107,7 @@ function pedir(mano){
                           }
                           else if(mano.blackJack && !mesa.manos[3].blackJack){
                             console.log(" ❤️♠️🔶🍀 Felicitaciones! conseguiste un blackJack y ganaste la partida! paga 3 a 2 ❤️♠️🔶🍀")
-                            mesa.cdts+=(mano.apuestaCerrada+mano.apuestaCerrada*2.5)
+                            mesa.cdts+=(mano.apuestaCerrada+mano.apuestaCerrada*3/2)
                           }
                           else if(mano.blackJack && mesa.manos[3].blackJack){
                             console.log(" ❤️♠️🔶🍀 Felicitaciones! conseguiste un blackJack y ganaste la partida! paga 1 a 1 ❤️♠️🔶🍀")
@@ -223,8 +223,7 @@ function pedir(mano){
 
                                seleccionApuesta=(mesa.manos.find((mano)=>mano.apuestaCerrada>0)).id-1
                                seleccionarApuesta(seleccionApuesta)
-                               crearPuntero(seleccionApuesta)          
-                                resultadoParcial(mesa.manos[seleccionApuesta])
+                               resultadoParcial(mesa.manos[seleccionApuesta])
   }
 
               
@@ -297,7 +296,7 @@ function apostar(apuesta,mano){
   if(mesa.manos[mano].puedeDoblar && mesa.abierta && mesa.manos[mano].apuestaCerrada*2<=mesa.cdts){
     mesa.manos[seleccionApuesta].doblarApuesta()
     let nodo=document.getElementById(`apuestaMano${mano+1}`)
-    nodo.innerHTML=mesa.manos[mano].apuestaCerrada + mesa.manos[mano].apuestaAbierta + "<br>Cdts"
+    nodo.innerHTML=mesa.manos[mano].apuestaCerrada + "<br>Cdts"
     actualizarNodeCdts()
     pedir(mano+1)
     plantarse(mano)
