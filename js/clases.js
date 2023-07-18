@@ -15,8 +15,11 @@ class Maso {
         for(let i=39,c=1;i<52;i++,c++){
             this.cartas[i]=new Carta("trebol",c,c,`./cartas/trebol/${c}.png`);
             }
+           
         if(joker){this.cartas.push(new Carta("joker","j",100,`./cartas/joker/1.png`))
                 this.cartas.push(new Carta("joker","j",100,`./cartas/joker/1.png`))}
+           
+            this.cartas.push(new Carta("dorso","dorso",NaN,"./cartas/joker/2.png"))
          
                     
     }
@@ -25,7 +28,7 @@ class Maso {
             //genera un numero aleatorio comprendido en el total de cartas del maso actual
             if(this.cartas.length>0){
             let min=0
-            let max=this.cartas.length-1
+            let max=this.cartas.length-2
             let cartaRandom=Math.floor((Math.random() * (max - min + 1)) + min);
             let carta=this.cartas[cartaRandom]
             this.cartas.splice(cartaRandom,1)
@@ -39,8 +42,7 @@ class Maso {
 class Carta{
         palo
         id
-        srcImagen
-        srcDorso="./cartas/joker/2.png"
+        img
         valor=[]
         color
         cara=true
@@ -57,7 +59,10 @@ class Carta{
             if(val==1){this.valor=[1,11]}
             else if(val>1 && val<=10){this.valor=[val]}
             else if(val>=11 && val<=13){this.valor=[10]}
-            this.srcImagen=src
+            
+            this.img=new Image
+            this.img.src=src
+
             
         
             if(p=="picas" || p=="trebol"){
@@ -73,7 +78,7 @@ class Carta{
             if(this.cara==true){
             this.cara=false
             let elemento=document.getElementById(this.id)
-            elemento.style.backgroundImage=`url(${this.srcDorso})`
+            elemento.style.backgroundImage=`url(${(maso.cartas.find((carta)=>carta.id=="dorso")).img.src})`
             elemento.classList.add("animate__animated")
             elemento.classList.add("animate__flip")
             setTimeout(() => {elemento.classList.remove("animate__animated")
@@ -82,7 +87,7 @@ class Carta{
             else if(this.cara==false){
             this.cara=true
             let elemento=document.getElementById(this.id)
-            elemento.style.backgroundImage=`url(${this.srcImagen})`
+            elemento.style.backgroundImage=`url(${this.img.src})`
             elemento.classList.add("animate__animated")
             elemento.classList.add("animate__flip")
             setTimeout(() => {elemento.classList.remove("animate__animated")
@@ -134,10 +139,10 @@ class Carta{
                     let nuevoDiv=document.createElement("div")
                     nuevoDiv.setAttribute("id",`${nuevaCarta.id}`)
                     if(cara){
-                        nuevoDiv.style.backgroundImage=`url(${nuevaCarta.srcImagen})`       
+                        nuevoDiv.style.backgroundImage=`url(${nuevaCarta.img.src})`       
                     }else if(!cara){
                         nuevaCarta.cara=false
-                        nuevoDiv.style.backgroundImage=`url(${nuevaCarta.srcDorso})`
+                        nuevoDiv.style.backgroundImage=`url(${(maso.cartas.find((carta)=>carta.id=="dorso")).img.src})`
                     }
                     
                     
