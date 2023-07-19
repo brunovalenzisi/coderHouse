@@ -74,15 +74,21 @@ function pedir(mano){
         if(mano.cartas.length==2 && mano.peso==21){
             mano.blackJack=true
             mano.cerrar()
+            siguiente()
+
+            
             }  else
                 if(mano.peso==21){
                     console.log("Conseguiste 21 puntos, te plantas");
                     mano.cerrar()
                     siguiente()
+                    
+                    
                     }
                   else if(mano.peso>21){
                     mano.cerrar()
                     siguiente()
+                   
                     }
                     
                   mesa.manos.forEach(mano => {if(mano.cerrada){manosCerradas++}
@@ -104,33 +110,33 @@ function pedir(mano){
                       mesa.manos.forEach(mano => {
                         if(mano.id<4 && mano.peso>0){
                           if(mano.peso>21){
-                          console.log("💀💀 Perdiste! sumaste mas de 21 puntos 💀💀")
+                          toast(`La mano ${mano.id} sumo mas de 21, perdes ${mano.apuestaCerrada} cdts`,'red')
                           }
                           else if(mano.blackJack && !mesa.manos[3].blackJack){
-                            console.log(" ❤️♠️🔶🍀 Felicitaciones! conseguiste un blackJack y ganaste la partida! paga 3 a 2 ❤️♠️🔶🍀")
+                            toast(`La mano ${mano.id} es un Blackjack, ganas ${mano.apuestaCerrada*3/2} cdts`,'green')
                             mesa.cdts+=(mano.apuestaCerrada+mano.apuestaCerrada*3/2)
                           }
                           else if(mano.blackJack && mesa.manos[3].blackJack){
-                            console.log(" ❤️♠️🔶🍀 Felicitaciones! conseguiste un blackJack y ganaste la partida! paga 1 a 1 ❤️♠️🔶🍀")
+                            toast(`La mano ${mano.id} es un Blackjack pero tambien la banca, ganas ${mano.apuestaCerrada} cdts`,'green')
                             mesa.cdts+=(2*mano.apuestaCerrada)
                           }
   
                           else if(mesa.manos[3].peso>21 && mano.peso<=21){
                               console.log("El crupier se paso")
-                              console.log(" ❤️♠️🔶🍀 Felicitaciones! ganaste la partida! paga 1 a 1 ❤️♠️🔶🍀")
+                              toast(`El crupier se paso contra la mano ${mano.id}, ganas ${mano.apuestaCerrada} cdts`,'green')
                               mesa.cdts+=(2*mano.apuestaCerrada)
                                }
   
                        else if(mano.peso>mesa.manos[3].peso){
-                                  console.log("❤️♠️🔶🍀 Felicitaciones! ganaste la partida! ❤️♠️🔶🍀 paga 1 a 1")
+                               toast(`La mano ${mano.id} sumo mas puntos que el crupier, ganas ${mano.apuestaCerrada} cdts`,'green')
                                   mesa.cdts+=(2*mano.apuestaCerrada)
                                   }
                                   
                                   else if (mano.peso<mesa.manos[3].peso){
-                                  console.log("💀💀 Perdiste! El crupier sumo mas puntos 💀💀")
+                                    toast(`el crupier sumo mas puntos que la mano ${mano.id}, perdes ${mano.apuestaCerrada} cdts`,'red')
                                  }
                               else if(mano.peso==mesa.manos[3].peso){
-                                  console.log("😐La partida resulto en empate😐");
+                                toast(`La mano ${mano.id} resulto en empate, recuperas ${mano.apuestaCerrada} cdts`);
                                   mesa.cdts+=mano.apuestaCerrada
                                   }
                         }
@@ -196,8 +202,9 @@ function pedir(mano){
 
 
   function empezarJuego(){    //reparte las cartas y evalua la primera mano
-    nodeMesa.removeChild(document.getElementById("puntero"))
+ 
   if(mesa.manos.some((mano)=>mano.cerrada==false) && !mesa.manos.some((mano)=>mano.peso>0) && mesa.enJuego ){
+  
    mesa.abrir()
     mesa.manos.forEach(mano => {
       if(!mano.cerrada){
@@ -217,12 +224,14 @@ function pedir(mano){
                           }, 1600);
                           setTimeout(() => {
                             mesa.entregarCarta(4,maso,true)
-                            mesa.manos[3].contarCartas()    
-                              }, 2400);
-                      
+                            mesa.manos[3].contarCartas()
                             seleccionApuesta= mesa.manos.find((mano)=>mano.apuestaCerrada>0).id-1
                             crearPuntero(seleccionApuesta)
-                            resultadoParcial(mesa.manos[seleccionApuesta])
+                            resultadoParcial(mesa.manos[seleccionApuesta])    
+                              }, 2400);
+                      
+                            
+                           
   }
 
               
@@ -275,6 +284,7 @@ function siguiente(){
       seleccionApuesta++
       crearPuntero(seleccionApuesta)
     } while(seleccionApuesta<2 && mesa.manos[seleccionApuesta].apuestaCerrada==0)
+    resultadoParcial(mesa.manos[seleccionApuesta])
   }
   
   
@@ -304,7 +314,7 @@ function apostar(apuesta,mano){
  } 
 
  function actualizarNodeCdts(){
-  nodeCdts.textContent=`${mesa.cdts} cdts`
+  nodeCdts.innerHTML=`${mesa.cdts} cdts`+ `<br>`+`Click para comprar`
     }
 
     function crearPuntero(mano){
@@ -321,6 +331,24 @@ function apostar(apuesta,mano){
       puntero.classList.add("animate__infinite")
     }
 
+function toast(texto,color){
+  Toastify({
+    text: texto,
+    duration: 5000,
+    //destination: "https://github.com/apvarun/toastify-js",
+    newWindow: true,
+    close: false,
+    gravity: "top", // `top` or `bottom`
+    position: "right", // `left`, `center` or `right`
+    stopOnFocus: false, // Prevents dismissing of toast on hover
+    style: {
+      background: color,
+    },
+    //onClick: function(){} // Callback after click
+  }).showToast();
+
+}
+    
     
 
 

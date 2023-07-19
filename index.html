@@ -11,12 +11,14 @@
   />
   
   <link rel="stylesheet" href="./estilos/estilos.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ConsoleBlackJack</title>
     <script src="./js/clases.js"></script>
     <script defer src="./js/script.js"></script>
+    <script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     
 </head>
 <body>
@@ -26,11 +28,12 @@
   
   
     <div class="mesa" id="mesa">
+     
       <div class="mano1" id="mano1" ></div>
       <div class="mano2" id="mano2"  ></div> 
       <div class="mano3" id="mano3"  ></div>
       <div class="cdts" id="cdts"></div>
-      <div id="apuestaMano1" class="apuestaMano1" onclick="seleccionarApuesta(0)">0<br>Cdts</div>
+     <div id="apuestaMano1" class="apuestaMano1" onclick="seleccionarApuesta(0)">0<br>Cdts</div>
         <div id="apuestaMano2" class="apuestaMano2" onclick="seleccionarApuesta(1)" >0<br>Cdts</div>
         <div id="apuestaMano3" class="apuestaMano3" onclick="seleccionarApuesta(2)">0<br>Cdts</div>
       <div class="mano4" id="mano4" ></div>

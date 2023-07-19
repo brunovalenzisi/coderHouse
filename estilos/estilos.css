@@ -305,6 +305,8 @@
     font-size: 30px;
     color: aliceblue;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    text-align: center;
 }
     
 
@@ -343,3 +345,5 @@
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
+
+

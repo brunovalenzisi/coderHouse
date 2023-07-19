@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Workshop - Cotizador</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="./estilos/estilosCheckOut.css">
+    <script defer src="./js/checkOut.js"></script>
+</head>
+<body>
+  <h1>console.Blackjack()</h1>
+  <h2>Recarga creditos y segui jugando!</h2>
+
+<form class="importe">
+  
+  <input type="number" name="creditos" id="creditos">
+  
+  <input type="number" name="importe" id="importe">
+
+  </form>
+
+  <form class="tarjeta" action="procesar_pago.php" method="post">
+    <header>Datos de tu tarjeta</header>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required>
+    
+    <label for="tarjeta">Número de tarjeta:</label>
+    <input type="text" id="tarjeta" name="tarjeta" required>
+    
+    <label for="caducidad">Fecha de caducidad:</label>
+    <input type="text" id="caducidad" name="caducidad" required>
+    
+    <label for="cvv">CVV:</label>
+    <input type="text" id="cvv" name="cvv" required>
+    
+    <input type="submit" value="Pagar">
+  </form>
+  
+</body>
+
+</html>
