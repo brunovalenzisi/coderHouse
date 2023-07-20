@@ -1,5 +1,4 @@
 window.addEventListener("load",pantallaInicial,false)
-let maso;
 let mesa;
 let seleccionApuesta=0
 
@@ -17,9 +16,7 @@ let nodeApuestaMano1=document.getElementById("apuestaMano1")
 let nodeApuestaMano2=document.getElementById("apuestaMano2")
 let nodeApuestaMano3=document.getElementById("apuestaMano3")
 let nodeCdts=document.getElementById("cdts")
-var input = document.createElement('input');
-input.type = 'file';
-input.accept = 'image/*';
+
 
 
 
@@ -41,7 +38,7 @@ actualizarNodeCdts(1000)
 function pedir(mano){
     if(!mesa.manos[mano-1].cerrada && mesa.abierta && mesa.enJuego){
     mesa.manos[mano-1].puedeDoblar=false   
-    mesa.entregarCarta(mano,maso,true)
+    mesa.entregarCarta(mano,mesa.maso,true)
     mesa.manos[mano-1].cerrarApuesta()
     mesa.manos[mano-1].contarCartas();
     resultadoParcial(mesa.manos[mano-1]);
@@ -173,7 +170,7 @@ function pedir(mano){
         mesa.manos[3].blackJack=true
       }
     while(mesa.manos[3].peso<17){  // el ciclo termina cuando se cumpla la condicion del reglamneto del juego
-            mesa.entregarCarta(4,maso,true);
+            mesa.entregarCarta(4,mesa.maso,true);
             mesa.manos[3].contarCartas();
             }
         }
@@ -189,7 +186,7 @@ function pedir(mano){
      function resetearPartida(){ 
       mesa.cerrar()     
       mesa.limpiarMesa()
-      maso=new Maso
+      
         
         }
         
@@ -213,9 +210,9 @@ function pedir(mano){
       if(!mano.cerrada){
       mano.puedeDoblar=true  
       mano.cerrarApuesta()
-      mesa.entregarCarta(mano.id,maso,true)
+      mesa.entregarCarta(mano.id,mesa.maso,true)
                     setTimeout(() => {
-                    mesa.entregarCarta(mano.id,maso,true);
+                    mesa.entregarCarta(mano.id,mesa.maso,true);
                     mano.contarCartas()    
                       }, 800);
     }
@@ -223,10 +220,10 @@ function pedir(mano){
     });
                     
                       setTimeout(() => {
-                        mesa.entregarCarta(4,maso,false)    
+                        mesa.entregarCarta(4,mesa.maso,false)    
                           }, 1600);
                           setTimeout(() => {
-                            mesa.entregarCarta(4,maso,true)
+                            mesa.entregarCarta(4,mesa.maso,true)
                             mesa.manos[3].contarCartas()
                             seleccionApuesta= mesa.manos.find((mano)=>mano.apuestaCerrada>0).id-1
                             crearPuntero(seleccionApuesta)

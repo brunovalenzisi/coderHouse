@@ -74,7 +74,7 @@ class Carta{
             if(this.cara==true){
             this.cara=false
             let elemento=document.getElementById(this.id)
-            elemento.style.backgroundImage=`url(${(maso.cartas.find((carta)=>carta.id=="dorso")).img.src})`
+            elemento.style.backgroundImage=`url(${(mesa.maso.cartas.find((carta)=>carta.id=="dorso")).img.src})`
             elemento.classList.add("animate__animated")
             elemento.classList.add("animate__flip")
             setTimeout(() => {elemento.classList.remove("animate__animated")
@@ -106,11 +106,13 @@ class Carta{
         }
     
     class Mesa{
+    maso
     cdts=1000    
     manos=[]
     abierta
     enJuego
     constructor(){
+    this.maso=new Maso    
     this.manos=[new Mano(1),new Mano(2),new Mano(3),new Mano(4)]
     this.abierta=false
     this.enJuego=false
@@ -151,7 +153,7 @@ class Carta{
                         nuevoDiv.style.backgroundImage=`url(${nuevaCarta.img.src})`       
                     }else if(!cara){
                         nuevaCarta.cara=false
-                        nuevoDiv.style.backgroundImage=`url(${(maso.cartas.find((carta)=>carta.id=="dorso")).img.src})`
+                        nuevoDiv.style.backgroundImage=`url(${(mesa.maso.cartas.find((carta)=>carta.id=="dorso")).img.src})`
                     }
                     
                     
@@ -205,7 +207,8 @@ class Carta{
             nodeApuestaMano2.innerHTML="0<br>Cdts"
             nodeApuestaMano3.innerHTML="0<br>Cdts" 
                 
-            this.manos.forEach(mano => {mano.alMaso()
+            this.manos.forEach(mano => {
+                mano.alMaso()
                 
             }); 
             }                
@@ -237,6 +240,8 @@ terminarRonda(){this.enJuego=false}
             }
             alMaso(){
                 this.peso=0
+                this.cartas.forEach(carta => {mesa.maso.cartas.push(carta)
+                 });
                 this.cartas=[]
                 this.apuestaAbierta=0
                 this.apuestaCerrada=0
