@@ -61,6 +61,7 @@ class Carta{
             else if(val>=11 && val<=13){this.valor=[10]}
             
             this.img=new Image
+            this.img.addEventListener('load',cargar,false)
             this.img.src=src
 
             

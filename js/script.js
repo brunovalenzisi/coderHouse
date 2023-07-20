@@ -348,7 +348,10 @@ function toast(texto,color){
   }).showToast();
 
 }
-    
+   
+function cargar(){
+  console.log('se cargo una imagen')
+}
     
 
 
