@@ -59,13 +59,7 @@ class Carta{
             if(val==1){this.valor=[1,11]}
             else if(val>1 && val<=10){this.valor=[val]}
             else if(val>=11 && val<=13){this.valor=[10]}
-            
-            this.img=new Image
-            this.img.addEventListener('load',cargar,false)
-            this.img.src=src
-
-            
-        
+          
             if(p=="picas" || p=="trebol"){
                 this.color="negro"
             }
@@ -73,6 +67,7 @@ class Carta{
                 this.color="rojo"
             }
             
+            this.cargarImagen(src)
         }
         
         girar(){
@@ -95,6 +90,19 @@ class Carta{
                               elemento.classList.remove("animate__flip")}, 1500);
             }
         }
+
+        cargarImagen(src){
+            fetch(src)
+            .then(response => response.blob())
+            .then(blob => {
+              // aquí puedes hacer lo que necesites con el objeto Blob, por ejemplo:
+              const url = URL.createObjectURL(blob); // crear una URL para mostrar la imagen
+              this.img = new Image
+              this.img.src = url;
+              console.log('se cargo una imagen')
+              });
+        }
+
         }
     
     class Mesa{

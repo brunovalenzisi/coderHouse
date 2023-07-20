@@ -17,6 +17,9 @@ let nodeApuestaMano1=document.getElementById("apuestaMano1")
 let nodeApuestaMano2=document.getElementById("apuestaMano2")
 let nodeApuestaMano3=document.getElementById("apuestaMano3")
 let nodeCdts=document.getElementById("cdts")
+var input = document.createElement('input');
+input.type = 'file';
+input.accept = 'image/*';
 
 
 
@@ -349,10 +352,7 @@ function toast(texto,color){
 
 }
    
-function cargar(){
-  console.log('se cargo una imagen')
-}
-    
+
 
 
 
