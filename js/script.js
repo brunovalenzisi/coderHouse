@@ -48,7 +48,7 @@ actualizarNodeCdts(1000)
 function pedir(mano){
     if(!mesa.manos[mano-1].cerrada && mesa.abierta && mesa.enJuego){
     mesa.manos[mano-1].puedeDoblar=false   
-    mesa.entregarCartaRandom(mano,mesa.maso,true,true)
+    mesa.entregarCartaRandom(mano,mesa.maso,true)
     mesa.manos[mano-1].cerrarApuesta()
     mesa.manos[mano-1].contarCartas();
     resultadoParcial(mesa.manos[mano-1]);
@@ -181,7 +181,7 @@ function pedir(mano){
         mesa.manos[3].blackJack=true
       }
     while(mesa.manos[3].peso<17){  // el ciclo termina cuando se cumpla la condicion del reglamneto del juego
-            mesa.entregarCartaRandom(4,mesa.maso,true,true);
+            mesa.entregarCartaRandom(4,mesa.maso,true);
             mesa.manos[3].contarCartas();
             }
         }
@@ -221,9 +221,9 @@ function pedir(mano){
       if(!mano.cerrada){
       mano.puedeDoblar=true  
       mano.cerrarApuesta()
-      mesa.entregarCartaRandom(mano.id,mesa.maso,true,true)
+      mesa.entregarCartaRandom(mano.id,mesa.maso,true)
                     setTimeout(() => {
-                    mesa.entregarCartaRandom(mano.id,mesa.maso,true,true);
+                    mesa.entregarCartaRandom(mano.id,mesa.maso,true);
                     mano.contarCartas()    
                       }, 800);
     }
@@ -231,10 +231,10 @@ function pedir(mano){
     });
                     
                       setTimeout(() => {
-                        mesa.entregarCartaRandom(4,mesa.maso,false,true)    
+                        mesa.entregarCartaRandom(4,mesa.maso,false)    
                           }, 1600);
                           setTimeout(() => {
-                            mesa.entregarCartaRandom(4,mesa.maso,true,true)
+                            mesa.entregarCartaRandom(4,mesa.maso,true)
                             mesa.manos[3].contarCartas()
                             mesa.seleccionApuesta= mesa.manos.find((mano)=>mano.apuestaCerrada>0).id-1
                             crearPuntero(mesa.seleccionApuesta)

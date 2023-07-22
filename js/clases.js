@@ -120,16 +120,13 @@ class Carta{
     this.abierta=false
     this.enJuego=false
     }
-        entregarCartaRandom(mano,baraja,cara,random,carta){
+        entregarCartaRandom(mano,baraja,cara){
             if(baraja.cartas.length>0){
             let nCartas
             let div
             let nuevaCarta
-            if(random){nuevaCarta=baraja.sacarCarta()}
-            else{nuevaCarta=carta
-            let indice=this.maso.cartas.indexOf(carta);
-            this.maso.cartas.splice(indice,1)
-            }
+            nuevaCarta=baraja.sacarCarta()
+            
             
             if(mano==1){
                 div= document.getElementById("mano1")
