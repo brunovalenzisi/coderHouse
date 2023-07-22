@@ -32,21 +32,21 @@
       <div class="mano1" id="mano1" ></div>
       <div class="mano2" id="mano2"  ></div> 
       <div class="mano3" id="mano3"  ></div>
-      <div class="cdts" id="cdts"></div>
+      <div class="cdts" id="cdts" onclick="checkOut()"></div>
      <div id="apuestaMano1" class="apuestaMano1" onclick="seleccionarApuesta(0)">0<br>Cdts</div>
         <div id="apuestaMano2" class="apuestaMano2" onclick="seleccionarApuesta(1)" >0<br>Cdts</div>
         <div id="apuestaMano3" class="apuestaMano3" onclick="seleccionarApuesta(2)">0<br>Cdts</div>
       <div class="mano4" id="mano4" ></div>
       <div class="control" id="control">
-        <div id="apostar10" class="botonApostar10" onclick="apostar(10,seleccionApuesta)">10Cdts</div>
-        <div id="apostar100" class="botonApostar100" onclick="apostar(100,seleccionApuesta)">100Cdts</div>
-        <div id="apostar500" class="botonApostar500" onclick="apostar(500,seleccionApuesta)">500Cdts</div>
-        <div id="apostar1000" class="botonApostar1000" onclick="apostar(1000,seleccionApuesta)">1000Cdts</div>
+        <div id="apostar10" class="botonApostar10" onclick="apostar(10,mesa.seleccionApuesta)">10Cdts</div>
+        <div id="apostar100" class="botonApostar100" onclick="apostar(100,mesa.seleccionApuesta)">100Cdts</div>
+        <div id="apostar500" class="botonApostar500" onclick="apostar(500,mesa.seleccionApuesta)">500Cdts</div>
+        <div id="apostar1000" class="botonApostar1000" onclick="apostar(1000,mesa.seleccionApuesta)">1000Cdts</div>
       <div class="botonesDirectores">
        <div id="botonDeal" class="botonDeal" onclick="empezarJuego()">Deal</div>
-        <div id="botonPedir" class="botonPedir" onclick="pedir(seleccionApuesta+1)">Pedir</div>
-        <div id="botonDoblar" class="botonDoblar" onclick="doblar(seleccionApuesta)">Doblar</div>  
-        <div id="botonPlantarse" class="botonPlantarse" onclick="plantarse(seleccionApuesta)">Plantarse</div>
+        <div id="botonPedir" class="botonPedir" onclick="pedir(mesa.seleccionApuesta+1)">Pedir</div>
+        <div id="botonDoblar" class="botonDoblar" onclick="doblar(mesa.seleccionApuesta)">Doblar</div>  
+        <div id="botonPlantarse" class="botonPlantarse" onclick="plantarse(mesa.seleccionApuesta)">Plantarse</div>
       
       </div>  
       

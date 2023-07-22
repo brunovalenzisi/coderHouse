@@ -20,6 +20,8 @@ class Maso {
                 this.cartas.push(new Carta("joker","j",100,`./cartas/joker/1.png`))}
            
             this.cartas.push(new Carta("dorso","dorso",NaN,"./cartas/joker/2.png"))
+
+            
          
                     
     }
@@ -100,7 +102,7 @@ class Carta{
               this.img = new Image
               this.img.src = url;
               console.log('se cargo una imagen')
-              });
+           });
         }
 
         }
@@ -111,17 +113,23 @@ class Carta{
     manos=[]
     abierta
     enJuego
+    seleccionApuesta=0
     constructor(){
     this.maso=new Maso    
     this.manos=[new Mano(1),new Mano(2),new Mano(3),new Mano(4)]
     this.abierta=false
     this.enJuego=false
     }
-        entregarCarta(mano,baraja,cara){
+        entregarCartaRandom(mano,baraja,cara,random,carta){
             if(baraja.cartas.length>0){
             let nCartas
             let div
-            let nuevaCarta=baraja.sacarCarta()
+            let nuevaCarta
+            if(random){nuevaCarta=baraja.sacarCarta()}
+            else{nuevaCarta=carta
+            let indice=this.maso.cartas.indexOf(carta);
+            this.maso.cartas.splice(indice,1)
+            }
             
             if(mano==1){
                 div= document.getElementById("mano1")

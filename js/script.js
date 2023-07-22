@@ -1,6 +1,6 @@
 window.addEventListener("load",pantallaInicial,false)
 let mesa;
-let seleccionApuesta=0
+
 
 
 let nodeMesa=document.getElementById("mesa")
@@ -27,18 +27,28 @@ let nodeCdts=document.getElementById("cdts")
 
 
 function pantallaInicial(){
-
 mesa=new Mesa
+if(localStorage.getItem("mesaPrevia")){
+recuperarMesa()
+crearBoton("Comenzar Partida")
+}else{
 crearBoton("Comenzar Partida")
 actualizarNodeCdts(1000)
 }
+}
+  
+  
+
+
+
+
 
 
 
 function pedir(mano){
     if(!mesa.manos[mano-1].cerrada && mesa.abierta && mesa.enJuego){
     mesa.manos[mano-1].puedeDoblar=false   
-    mesa.entregarCarta(mano,mesa.maso,true)
+    mesa.entregarCartaRandom(mano,mesa.maso,true,true)
     mesa.manos[mano-1].cerrarApuesta()
     mesa.manos[mano-1].contarCartas();
     resultadoParcial(mesa.manos[mano-1]);
@@ -145,6 +155,7 @@ function pedir(mano){
                        
                       actualizarNodeCdts()
                       mesa.terminarRonda()
+                      guardarMesa()
                       if(!document.getElementById("botonIniciar")){crearBoton("Siguiente ronda")}
                       
                       }
@@ -170,7 +181,7 @@ function pedir(mano){
         mesa.manos[3].blackJack=true
       }
     while(mesa.manos[3].peso<17){  // el ciclo termina cuando se cumpla la condicion del reglamneto del juego
-            mesa.entregarCarta(4,mesa.maso,true);
+            mesa.entregarCartaRandom(4,mesa.maso,true,true);
             mesa.manos[3].contarCartas();
             }
         }
@@ -210,9 +221,9 @@ function pedir(mano){
       if(!mano.cerrada){
       mano.puedeDoblar=true  
       mano.cerrarApuesta()
-      mesa.entregarCarta(mano.id,mesa.maso,true)
+      mesa.entregarCartaRandom(mano.id,mesa.maso,true,true)
                     setTimeout(() => {
-                    mesa.entregarCarta(mano.id,mesa.maso,true);
+                    mesa.entregarCartaRandom(mano.id,mesa.maso,true,true);
                     mano.contarCartas()    
                       }, 800);
     }
@@ -220,14 +231,14 @@ function pedir(mano){
     });
                     
                       setTimeout(() => {
-                        mesa.entregarCarta(4,mesa.maso,false)    
+                        mesa.entregarCartaRandom(4,mesa.maso,false,true)    
                           }, 1600);
                           setTimeout(() => {
-                            mesa.entregarCarta(4,mesa.maso,true)
+                            mesa.entregarCartaRandom(4,mesa.maso,true,true)
                             mesa.manos[3].contarCartas()
-                            seleccionApuesta= mesa.manos.find((mano)=>mano.apuestaCerrada>0).id-1
-                            crearPuntero(seleccionApuesta)
-                            resultadoParcial(mesa.manos[seleccionApuesta])    
+                            mesa.seleccionApuesta= mesa.manos.find((mano)=>mano.apuestaCerrada>0).id-1
+                            crearPuntero(mesa.seleccionApuesta)
+                            resultadoParcial(mesa.manos[mesa.seleccionApuesta])    
                               }, 2400);
                       
                             
@@ -272,7 +283,7 @@ function crearBoton(texto){
 function seleccionarApuesta(mano){
   if(!mesa.abierta && mesa.enJuego){
     crearPuntero(mano)
-    seleccionApuesta=mano
+    mesa.seleccionApuesta=mano
   }
 
   
@@ -281,10 +292,10 @@ function seleccionarApuesta(mano){
 function siguiente(){
 
     do{
-      seleccionApuesta++
-      crearPuntero(seleccionApuesta)
-    } while(seleccionApuesta<2 && mesa.manos[seleccionApuesta].apuestaCerrada==0)
-    resultadoParcial(mesa.manos[seleccionApuesta])
+      mesa.seleccionApuesta++
+      crearPuntero(mesa.seleccionApuesta)
+    } while(mesa.seleccionApuesta<2 && mesa.manos[mesa.seleccionApuesta].apuestaCerrada==0)
+    resultadoParcial(mesa.manos[mesa.seleccionApuesta])
   }
   
   
@@ -296,6 +307,7 @@ function apostar(apuesta,mano){
     mesa.manos[mano].sumarApuesta(apuesta)
     nodo.innerHTML=mesa.manos[mano].apuestaCerrada + mesa.manos[mano].apuestaAbierta + "<br>Cdts"
     actualizarNodeCdts()
+    
   }
   
   }
@@ -303,7 +315,7 @@ function apostar(apuesta,mano){
 
  function doblar(mano){
   if(mesa.manos[mano].puedeDoblar && mesa.abierta && mesa.manos[mano].apuestaCerrada*2<=mesa.cdts){
-    mesa.manos[seleccionApuesta].doblarApuesta()
+    mesa.manos[mesa.seleccionApuesta].doblarApuesta()
     let nodo=document.getElementById(`apuestaMano${mano+1}`)
     nodo.innerHTML=mesa.manos[mano].apuestaCerrada + mesa.manos[mano].apuestaAbierta + "<br>Cdts"
     actualizarNodeCdts()
@@ -314,6 +326,7 @@ function apostar(apuesta,mano){
  } 
 
  function actualizarNodeCdts(){
+
   nodeCdts.innerHTML=`${mesa.cdts} cdts`+ `<br>`+`Click para comprar`
     }
 
@@ -334,7 +347,7 @@ function apostar(apuesta,mano){
 function toast(texto,color){
   Toastify({
     text: texto,
-    duration: 5000,
+    duration: 6500,
     //destination: "https://github.com/apvarun/toastify-js",
     newWindow: true,
     close: false,
@@ -348,7 +361,21 @@ function toast(texto,color){
   }).showToast();
 
 }
-   
+
+function recuperarMesa(){
+mesaPrevia=JSON.parse(localStorage.getItem("mesaPrevia"))
+mesa.cdts=mesaPrevia.cdts
+actualizarNodeCdts(mesa.cdts)
+}
+function guardarMesa(){
+  localStorage.setItem("mesaPrevia",JSON.stringify(mesa))
+}
+
+
+function checkOut(){
+  window.location = './checkOut.html'
+}
+
 
 
 
