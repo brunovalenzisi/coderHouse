@@ -1,6 +1,7 @@
 
 class Maso {
     cartas=[];
+    dorso
     constructor (joker){
         
         for(let i=0, c=1;i<13;i++,c++){
@@ -19,18 +20,15 @@ class Maso {
         if(joker){this.cartas.push(new Carta("joker","j",100,`./cartas/joker/1.png`))
                 this.cartas.push(new Carta("joker","j",100,`./cartas/joker/1.png`))}
            
-            this.cartas.push(new Carta("dorso","dorso",NaN,"./cartas/joker/2.png"))
+            this.dorso=new Carta("dorso","dorso",NaN,"./cartas/joker/2.png")
+}
 
-            
-         
-                    
-    }
-    sacarCarta(){
+sacarCarta(){
 
             //genera un numero aleatorio comprendido en el total de cartas del maso actual
             if(this.cartas.length>0){
             let min=0
-            let max=this.cartas.length-2
+            let max=this.cartas.length-1
             let cartaRandom=Math.floor((Math.random() * (max - min + 1)) + min);
             let carta=this.cartas[cartaRandom]
             this.cartas.splice(cartaRandom,1)
@@ -76,7 +74,7 @@ class Carta{
             if(this.cara==true){
             this.cara=false
             let elemento=document.getElementById(this.id)
-            elemento.style.backgroundImage=`url(${(mesa.maso.cartas.find((carta)=>carta.id=="dorso")).img.src})`
+            elemento.style.backgroundImage=`url(${mesa.maso.dorso.img.src})`
             elemento.classList.add("animate__animated")
             elemento.classList.add("animate__flip")
             setTimeout(() => {elemento.classList.remove("animate__animated")
@@ -158,7 +156,7 @@ class Carta{
                         nuevoDiv.style.backgroundImage=`url(${nuevaCarta.img.src})`       
                     }else if(!cara){
                         nuevaCarta.cara=false
-                        nuevoDiv.style.backgroundImage=`url(${(mesa.maso.cartas.find((carta)=>carta.id=="dorso")).img.src})`
+                        nuevoDiv.style.backgroundImage=`url(${mesa.maso.dorso.img.src})`
                     }
                     
                     
