@@ -62,4 +62,7 @@ input[type="number"] {
         border-style: double;
         border-color: aliceblue; 
       }
-  
+  .inputNumero{
+    font-size: 50px;
+    background-color: black;
+  }

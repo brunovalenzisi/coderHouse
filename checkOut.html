@@ -7,6 +7,7 @@
     <link rel="shortcut icon" href="images/favicon.png" type="image/png">
     <link rel="stylesheet" href="./estilos/estilosCheckOut.css">
     <script defer src="./js/checkOut.js"></script>
+    
 </head>
 <body>
   <h1>console.Blackjack()</h1>
@@ -14,13 +15,13 @@
 
 <form class="importe">
   
-  <input type="number" name="creditos" id="creditos">
+  <input class="inputNumero" type="number" name="creditos" id="creditos" placeholder="CDTS">
   
-  <input type="number" name="importe" id="importe">
+ 
 
   </form>
 
-  <form class="tarjeta" action="procesar_pago.php" method="post">
+  <form class="tarjeta" onsubmit="acreditar();return false">
     <header>Datos de tu tarjeta</header>
     <label for="nombre">Nombre:</label>
     <input type="text" id="nombre" name="nombre" required>
@@ -33,8 +34,9 @@
     
     <label for="cvv">CVV:</label>
     <input type="text" id="cvv" name="cvv" required>
+    <button>Procesar pago</button>
     </form>
-    <button onclick="acreditar()">Procesar pago</button>
+    
 </body>
 
 </html>

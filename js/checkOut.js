@@ -1,9 +1,16 @@
-document.querySelector('form').addEventListener('submit', () => {
+nodeCreditos=document.getElementById("creditos")
+nodeNombre=document.getElementById("nombre")
+nodeTarjeta=document.getElementById("tarjeta")
+nodeCaducidad=document.getElementById("caducidad")
+nodeCVV=document.getElementById("cvv")
 
-    console.log ('HAGO UN SUBMIT');
-    
-    });
-    
+
+function acreditar(){
+    if(nodeCreditos != ""){
+    localStorage.setItem("acreditar",parseInt(nodeCreditos.value))
+    window.location = './index.html'
+    }
+}
     
     
     

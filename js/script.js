@@ -33,7 +33,8 @@ recuperarMesa()
 crearBoton("Comenzar Partida")
 }else{
 crearBoton("Comenzar Partida")
-actualizarNodeCdts(1000)
+mesa.cdts=1000
+actualizarNodeCdts()
 }
 }
   
@@ -365,6 +366,8 @@ function toast(texto,color){
 function recuperarMesa(){
 mesaPrevia=JSON.parse(localStorage.getItem("mesaPrevia"))
 mesa.cdts=mesaPrevia.cdts
+if(localStorage.getItem("acreditar") != ""){mesa.cdts+=parseInt(localStorage.getItem("acreditar"));guardarMesa()}
+localStorage.setItem("acreditar",'')
 actualizarNodeCdts(mesa.cdts)
 }
 function guardarMesa(){
