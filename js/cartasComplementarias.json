@@ -1,0 +1,19 @@
+[
+    {
+        "palo": "dorso",
+        "id": "dorso",
+        "valor": "NaN",
+        "color": "dorso",
+        "cara": true,
+        "src": "./cartas/joker/2.png"
+    },
+    {
+        "palo": "joker",
+        "id": "joker",
+        "valor": "NaN",
+        "color": "joker",
+        "cara": true,
+        "src": "./cartas/picas/1.png"
+    }
+    
+]

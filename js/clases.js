@@ -1,27 +1,27 @@
 
 class Maso {
     cartas=[];
-    dorso
+    dorso;
     constructor (joker){
+        fetch("./js/cartas.json")
+        .then(response=>response.json())
+        .then(response=>response.forEach(carta =>{this.cartas.push(new Carta(carta));
+           })
+           ).then(
+            fetch("./js/cartasComplementarias.json")
+           .then(response=>response.json())
+           .then(response=>this.dorso=new Carta(response[0])))
+
+        if(joker){
+            fetch("./js/cartasComplementarias.json")
+            .then(response=>response.json())
+            .then(response=>this.cartas.push(new Carta(response[1]),new Carta(response[1])))
+
+        }   
+           
+              
         
-        for(let i=0, c=1;i<13;i++,c++){
-            this.cartas[i]=new Carta("picas",c,c,`./cartas/picas/${c}.png`);
-            }
-        for(let i=13,c=1;i<26;i++,c++){
-            this.cartas[i]=new Carta("corazones",c,c,`./cartas/corazones/${c}.png`);
-            }
-        for(let i=26,c=1;i<39;i++,c++){
-            this.cartas[i]=new Carta("diamantes",c,c,`./cartas/diamantes/${c}.png`);
-            }
-        for(let i=39,c=1;i<52;i++,c++){
-            this.cartas[i]=new Carta("trebol",c,c,`./cartas/trebol/${c}.png`);
-            }
-           
-        if(joker){this.cartas.push(new Carta("joker","j",100,`./cartas/joker/1.png`))
-                this.cartas.push(new Carta("joker","j",100,`./cartas/joker/1.png`))}
-           
-            this.dorso=new Carta("dorso","dorso",NaN,"./cartas/joker/2.png")
-}
+    }
 
 sacarCarta(){
 
@@ -35,8 +35,9 @@ sacarCarta(){
             return carta
            }
             }
+        }
             
-    }
+    
 
 
 class Carta{
@@ -46,28 +47,12 @@ class Carta{
         valor=[]
         color
         cara=true
-        constructor(p,id,val,src){
-            this.palo=p
-            
-            if(id>=1 && id<=10){this.id=`${id}-${this.palo}`}
-            else if(id==11){this.id=`J-${this.palo}`}
-            else if(id==12){this.id=`Q-${this.palo}`}
-            else if(id==13){this.id=`K-${this.palo}`}
-            else if(p=="joker"){this.id=p}
-            else if(p=="dorso"){this.id=p}
-            
-            if(val==1){this.valor=[1,11]}
-            else if(val>1 && val<=10){this.valor=[val]}
-            else if(val>=11 && val<=13){this.valor=[10]}
-          
-            if(p=="picas" || p=="trebol"){
-                this.color="negro"
-            }
-            else if(p=="corazones" || p=="diamantes"){
-                this.color="rojo"
-            }
-            
-            this.cargarImagen(src)
+        constructor(cartaMolde){
+            this.palo=cartaMolde.palo
+            this.id=cartaMolde.id
+            this.valor=cartaMolde.valor
+            this.color=cartaMolde.color
+            this.cargarImagen(cartaMolde.src)
         }
         
         girar(){
@@ -113,7 +98,7 @@ class Carta{
     enJuego
     seleccionApuesta=0
     constructor(){
-    this.maso=new Maso    
+    this.maso=new Maso()    
     this.manos=[new Mano(1),new Mano(2),new Mano(3),new Mano(4)]
     this.abierta=false
     this.enJuego=false

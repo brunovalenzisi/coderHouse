@@ -27,6 +27,7 @@ let nodeCdts=document.getElementById("cdts")
 
 
 function pantallaInicial(){
+
 mesa=new Mesa
 if(localStorage.getItem("mesaPrevia")){
 recuperarMesa()
@@ -215,7 +216,7 @@ function pedir(mano){
 
   function empezarJuego(){    //reparte las cartas y evalua la primera mano
  
-  if(mesa.manos.some((mano)=>mano.cerrada==false) && !mesa.manos.some((mano)=>mano.peso>0) && mesa.enJuego ){
+  if(mesa.manos.some((mano)=>mano.cerrada==false) && !mesa.manos.some((mano)=>mano.peso>0) && mesa.enJuego && !mesa.abierta ){
   
    mesa.abrir()
     mesa.manos.forEach(mano => {

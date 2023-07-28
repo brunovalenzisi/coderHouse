@@ -1,0 +1,526 @@
+[
+    {
+        "palo": "picas",
+        "id": "1-picas",
+        "valor": [
+            1,
+            11
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/picas/1.png"
+    },
+    {
+        "palo": "picas",
+        "id": "2-picas",
+        "valor": [
+            2
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/picas/2.png"
+    },
+    {
+        "palo": "picas",
+        "id": "3-picas",
+        "valor": [
+            3
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/picas/3.png"
+    },
+    {
+        "palo": "picas",
+        "id": "4-picas",
+        "valor": [
+            4
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/picas/4.png"
+    },
+    {
+        "palo": "picas",
+        "id": "5-picas",
+        "valor": [
+            5
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/picas/5.png"
+    },
+    {
+        "palo": "picas",
+        "id": "6-picas",
+        "valor": [
+            6
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/picas/6.png"
+    },
+    {
+        "palo": "picas",
+        "id": "7-picas",
+        "valor": [
+            7
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/picas/7.png"
+    },
+    {
+        "palo": "picas",
+        "id": "8-picas",
+        "valor": [
+            8
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/picas/8.png"
+    },
+    {
+        "palo": "picas",
+        "id": "9-picas",
+        "valor": [
+            9
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/picas/9.png"
+    },
+    {
+        "palo": "picas",
+        "id": "10-picas",
+        "valor": [
+            10
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/picas/10.png"
+    },
+    {
+        "palo": "picas",
+        "id": "J-picas",
+        "valor": [
+            10
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/picas/11.png"
+    },
+    {
+        "palo": "picas",
+        "id": "Q-picas",
+        "valor": [
+            10
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/picas/12.png"
+    },
+    {
+        "palo": "picas",
+        "id": "K-picas",
+        "valor": [
+            10
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/picas/13.png"
+    },
+    {
+        "palo": "corazones",
+        "id": "1-corazones",
+        "valor": [
+            1,
+            11
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/corazones/1.png"
+    },
+    {
+        "palo": "corazones",
+        "id": "2-corazones",
+        "valor": [
+            2
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/corazones/2.png"
+    },
+    {
+        "palo": "corazones",
+        "id": "3-corazones",
+        "valor": [
+            3
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/corazones/3.png"
+    },
+    {
+        "palo": "corazones",
+        "id": "4-corazones",
+        "valor": [
+            4
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/corazones/4.png"
+    },
+    {
+        "palo": "corazones",
+        "id": "5-corazones",
+        "valor": [
+            5
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/corazones/5.png"
+    },
+    {
+        "palo": "corazones",
+        "id": "6-corazones",
+        "valor": [
+            6
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/corazones/6.png"
+    },
+    {
+        "palo": "corazones",
+        "id": "7-corazones",
+        "valor": [
+            7
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/corazones/7.png"
+    },
+    {
+        "palo": "corazones",
+        "id": "8-corazones",
+        "valor": [
+            8
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/corazones/8.png"
+    },
+    {
+        "palo": "corazones",
+        "id": "9-corazones",
+        "valor": [
+            9
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/corazones/9.png"
+    },
+    {
+        "palo": "corazones",
+        "id": "10-corazones",
+        "valor": [
+            10
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/corazones/10.png"
+    },
+    {
+        "palo": "corazones",
+        "id": "J-corazones",
+        "valor": [
+            10
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/corazones/11.png"
+    },
+    {
+        "palo": "corazones",
+        "id": "Q-corazones",
+        "valor": [
+            10
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/corazones/12.png"
+    },
+    {
+        "palo": "corazones",
+        "id": "K-corazones",
+        "valor": [
+            10
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/corazones/13.png"
+    },
+    {
+        "palo": "diamantes",
+        "id": "1-diamantes",
+        "valor": [
+            1,
+            11
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/diamantes/1.png"
+    },
+    {
+        "palo": "diamantes",
+        "id": "2-diamantes",
+        "valor": [
+            2
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/diamantes/2.png"
+    },
+    {
+        "palo": "diamantes",
+        "id": "3-diamantes",
+        "valor": [
+            3
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/diamantes/3.png"
+    },
+    {
+        "palo": "diamantes",
+        "id": "4-diamantes",
+        "valor": [
+            4
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/diamantes/4.png"
+    },
+    {
+        "palo": "diamantes",
+        "id": "5-diamantes",
+        "valor": [
+            5
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/diamantes/5.png"
+    },
+    {
+        "palo": "diamantes",
+        "id": "6-diamantes",
+        "valor": [
+            6
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/diamantes/6.png"
+    },
+    {
+        "palo": "diamantes",
+        "id": "7-diamantes",
+        "valor": [
+            7
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/diamantes/7.png"
+    },
+    {
+        "palo": "diamantes",
+        "id": "8-diamantes",
+        "valor": [
+            8
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/diamantes/8.png"
+    },
+    {
+        "palo": "diamantes",
+        "id": "9-diamantes",
+        "valor": [
+            9
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/diamantes/9.png"
+    },
+    {
+        "palo": "diamantes",
+        "id": "10-diamantes",
+        "valor": [
+            10
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/diamantes/10.png"
+    },
+    {
+        "palo": "diamantes",
+        "id": "J-diamantes",
+        "valor": [
+            10
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/diamantes/11.png"
+    },
+    {
+        "palo": "diamantes",
+        "id": "Q-diamantes",
+        "valor": [
+            10
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/diamantes/12.png"
+    },
+    {
+        "palo": "diamantes",
+        "id": "K-diamantes",
+        "valor": [
+            10
+        ],
+        "color": "rojo",
+        "cara": true,
+        "src": "./cartas/diamantes/13.png"
+    },
+    {
+        "palo": "trebol",
+        "id": "1-trebol",
+        "valor": [
+            1,
+            11
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/trebol/1.png"
+    },
+    {
+        "palo": "trebol",
+        "id": "2-trebol",
+        "valor": [
+            2
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/trebol/2.png"
+    },
+    {
+        "palo": "trebol",
+        "id": "3-trebol",
+        "valor": [
+            3
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/trebol/3.png"
+    },
+    {
+        "palo": "trebol",
+        "id": "4-trebol",
+        "valor": [
+            4
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/trebol/4.png"
+    },
+    {
+        "palo": "trebol",
+        "id": "5-trebol",
+        "valor": [
+            5
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/trebol/5.png"
+    },
+    {
+        "palo": "trebol",
+        "id": "6-trebol",
+        "valor": [
+            6
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/trebol/6.png"
+    },
+    {
+        "palo": "trebol",
+        "id": "7-trebol",
+        "valor": [
+            7
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/trebol/7.png"
+    },
+    {
+        "palo": "trebol",
+        "id": "8-trebol",
+        "valor": [
+            8
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/trebol/8.png"
+    },
+    {
+        "palo": "trebol",
+        "id": "9-trebol",
+        "valor": [
+            9
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/trebol/9.png"
+    },
+    {
+        "palo": "trebol",
+        "id": "10-trebol",
+        "valor": [
+            10
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/trebol/10.png"
+    },
+    {
+        "palo": "trebol",
+        "id": "J-trebol",
+        "valor": [
+            10
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/trebol/11.png"
+    },
+    {
+        "palo": "trebol",
+        "id": "Q-trebol",
+        "valor": [
+            10
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/trebol/12.png"
+    },
+    {
+        "palo": "trebol",
+        "id": "K-trebol",
+        "valor": [
+            10
+        ],
+        "color": "negro",
+        "cara": true,
+        "src": "./cartas/trebol/13.png"
+    }
+]
