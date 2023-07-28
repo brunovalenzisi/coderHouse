@@ -1,4 +1,4 @@
-window.addEventListener("load",pantallaInicial,false)
+window.addEventListener("load",cargarPagina,false)
 let mesa;
 
 
@@ -18,8 +18,10 @@ let nodeApuestaMano3=document.getElementById("apuestaMano3")
 let nodeCdts=document.getElementById("cdts")
 
 
-
-
+function cargarPagina(){
+  mesa=new Mesa
+  crearBarraDeProgreso()
+}
 
 
 
@@ -27,8 +29,6 @@ let nodeCdts=document.getElementById("cdts")
 
 
 function pantallaInicial(){
-
-mesa=new Mesa
 if(localStorage.getItem("mesaPrevia")){
 recuperarMesa()
 crearBoton("Comenzar Partida")
@@ -378,6 +378,30 @@ function guardarMesa(){
 
 function checkOut(){
   window.location = './checkOut.html'
+}
+
+function crearBarraDeProgreso(){
+  let nodeBarraContenedor=document.createElement("div")
+  nodeBarraContenedor.id="contenedorBarra"
+  nodeBarraContenedor.classList.add("progress")
+  let nodeBarra=document.createElement("progress")
+  nodeBarra.classList.add("progress-bar")
+  nodeBarra.id="barraDeProgreso"
+  nodeBarra.value=0
+
+  nodeBarraContenedor.appendChild(nodeBarra)
+  nodeMesa.appendChild(nodeBarraContenedor)
+}
+
+function actualizarBarraDeProgreso() {
+let contenedor=document.getElementById("contenedorBarra")  
+let barra=document.getElementById("barraDeProgreso")
+barra.max=mesa.maso.cartas.length
+barra.value=barra.value+1
+if(barra.value==barra.max){
+  nodeMesa.removeChild(contenedor)
+  pantallaInicial()
+}
 }
 
 

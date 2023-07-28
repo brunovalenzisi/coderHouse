@@ -85,6 +85,7 @@ class Carta{
               this.img = new Image
               this.img.src = url;
               console.log('se cargo una imagen')
+              actualizarBarraDeProgreso()
            });
         }
 
