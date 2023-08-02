@@ -2,7 +2,7 @@ window.addEventListener("load",cargarPagina,false)
 let mesa;
 
 
-
+//se linkean todos los elementos interactivos del HTML
 let nodeMesa=document.getElementById("mesa")
 let nodeMano1=document.getElementById("mano1")
 let nodeMano2=document.getElementById("mano2")
@@ -16,38 +16,42 @@ let nodeApuestaMano1=document.getElementById("apuestaMano1")
 let nodeApuestaMano2=document.getElementById("apuestaMano2")
 let nodeApuestaMano3=document.getElementById("apuestaMano3")
 let nodeCdts=document.getElementById("cdts")
+let nodeBotonDeal=document.getElementById("botonDeal")
+let nodeBotonPedir=document.getElementById("botonPedir")
+let nodeBotonDoblar=document.getElementById("botonDoblar")
+let nodeBotonPlantarse=document.getElementById("botonPlantarse")
+
+//se agregan todos los eventos de click
+nodeCdts.addEventListener("click",checkOut,false)
+nodeApuestaMano1.addEventListener("click",()=>{seleccionarApuesta(0)},false)
+nodeApuestaMano2.addEventListener("click",()=>{seleccionarApuesta(1)},false)  
+nodeApuestaMano3.addEventListener("click",()=>{seleccionarApuesta(2)},false)
+node10.addEventListener("click",()=>{apostar(10,mesa.seleccionApuesta)},false)
+node100.addEventListener("click",()=>{apostar(100,mesa.seleccionApuesta)},false)
+node500.addEventListener("click",()=>{apostar(500,mesa.seleccionApuesta)},false)
+node1000.addEventListener("click",()=>{apostar(1000,mesa.seleccionApuesta)},false)
+nodeBotonDeal.addEventListener("click",empezarJuego,false)  
+nodeBotonPedir.addEventListener("click",()=>{pedir(mesa.seleccionApuesta+1)},false)  
+nodeBotonDoblar.addEventListener("click",()=>{doblar(mesa.seleccionApuesta)},false)  
+nodeBotonPlantarse.addEventListener("click",()=>{plantarse(mesa.seleccionApuesta)},false)  
 
 
+//primer funcion (disparada por el evento onLoad)
 function cargarPagina(){
-  mesa=new Mesa
-  crearBarraDeProgreso()
+  mesa=new Mesa // instancia un objeto de la clase Mesa, el cual a su vez, instancia otros objetos de las clases Maso, Carta y Mano
+  crearBarraDeProgreso() // crea una barra de progreso que al completarse, dispara la funcion inicial del Juego
 }
-
-
-
-
 
 
 function pantallaInicial(){
-if(localStorage.getItem("mesaPrevia")){
-recuperarMesa()
+
+recuperarMesa() //recupera los creditos de partidas anteriores
 crearBoton("Comenzar Partida")
-}else{
-crearBoton("Comenzar Partida")
-mesa.cdts=1000
-actualizarNodeCdts()
-}
 }
   
   
-
-
-
-
-
-
-
-function pedir(mano){
+//pide una carta en la mano enviada como parametro
+function pedir(mano){ 
     if(!mesa.manos[mano-1].cerrada && mesa.abierta && mesa.enJuego){
     mesa.manos[mano-1].puedeDoblar=false   
     mesa.entregarCartaRandom(mano,mesa.maso,true)
@@ -58,7 +62,7 @@ function pedir(mano){
     
     }
 
-
+    //Anima un elemento pasado como parametro utilizando una libreria 
     const animarClase = (element, animation, prefix = 'animate__') =>
   
     new Promise((resolve, reject) => {
@@ -79,7 +83,7 @@ function pedir(mano){
 
 
 
- // evalua la situacion de la partida en diferentes estados de la misma, se utiliza el parametro jugador para definir estos estados.
+ // evalua la situacion de cada mano, mientas la ronda no haya terminado.
     function resultadoParcial(mano){
         let manosCerradas=0 
         if(mano.id<4 && mano.peso>0){ 
@@ -91,18 +95,14 @@ function pedir(mano){
             
             }  else
                 if(mano.peso==21){
-                    console.log("Conseguiste 21 puntos, te plantas");
                     mano.cerrar()
                     siguiente()
-                    
-                    
-                    }
+                   }
                   else if(mano.peso>21){
                     mano.cerrar()
                     siguiente()
+                   }
                    
-                    }
-                    
                   mesa.manos.forEach(mano => {if(mano.cerrada){manosCerradas++}
                   });
                   if(manosCerradas==4){
@@ -115,7 +115,7 @@ function pedir(mano){
       }
                   
         
-                    
+                    //evalua la situacion de cada mano cuando termina la ronda y reparte ganancias
                     function resultadoFinal(){
                       mesa.cerrar()
                       jugadaCrupier()
@@ -161,7 +161,7 @@ function pedir(mano){
                       if(!document.getElementById("botonIniciar")){crearBoton("Siguiente ronda")}
                       
                       }
-                            
+    //cierra la mano actual                        
     function plantarse(mano){
       if(mesa.abierta && mesa.enJuego){
         if(!mesa.manos[mano].cerrada){
@@ -176,8 +176,8 @@ function pedir(mano){
                     
     
 
-
-    function jugadaCrupier(){   // a partir de aqui, comienza a jugar el programa
+    
+     function jugadaCrupier(){   // a partir de aqui, comienza a jugar el programa
       mesa.manos[3].cartas[0].girar()
       if(mesa.manos[3].peso==21){
         mesa.manos[3].blackJack=true
@@ -195,7 +195,7 @@ function pedir(mano){
        
    
 
-     //inicializa las variables
+     
      function resetearPartida(){ 
       mesa.cerrar()     
       mesa.limpiarMesa()
@@ -272,7 +272,8 @@ function pedir(mano){
             iniciarInterface()
         
         }
-function crearBoton(texto){
+  //crea el boton para iniciar el juego   
+  function crearBoton(texto){
   let botonIniciar=document.createElement("h1")
     botonIniciar.classList.add("botonIniciar")
     botonIniciar.id="botonIniciar"
@@ -282,6 +283,7 @@ function crearBoton(texto){
     animarClase(botonIniciar.id,"bounce")
 }
 
+//alterna entre las 3 manos para apostar en cada una
 function seleccionarApuesta(mano){
   if(!mesa.abierta && mesa.enJuego){
     crearPuntero(mano)
@@ -290,7 +292,7 @@ function seleccionarApuesta(mano){
 
   
 }
-
+//pasa a la siguiente mano que se encuentre abierta, cuando se cierra la actual
 function siguiente(){
 
     do{
@@ -301,7 +303,7 @@ function siguiente(){
   }
   
   
-
+//realiza una apuesta en la mano seleccionada
 function apostar(apuesta,mano){
   if(mesa.cdts>=apuesta && mesa.manos[mano].apuestaCerrada==0 && !mesa.abierta && mesa.enJuego){
     let nodo=document.getElementById(`apuestaMano${mano+1}`)
@@ -314,7 +316,7 @@ function apostar(apuesta,mano){
   
   }
 
-
+//dobla una apuesta si se cumplen las condiciones del reglamento
  function doblar(mano){
   if(mesa.manos[mano].puedeDoblar && mesa.abierta && mesa.manos[mano].apuestaCerrada*2<=mesa.cdts){
     mesa.manos[mesa.seleccionApuesta].doblarApuesta()
@@ -328,10 +330,9 @@ function apostar(apuesta,mano){
  } 
 
  function actualizarNodeCdts(){
-
-  nodeCdts.innerHTML=`${mesa.cdts} cdts`+ `<br>`+`Click para comprar`
+nodeCdts.innerHTML=`${mesa.cdts} cdts`+ `<br>`+`Click para comprar`
     }
-
+    //crea un puntero indicando la mano activa 
     function crearPuntero(mano){
       if(document.getElementById("puntero")){
         let punteroViejo=document.getElementById("puntero")
@@ -345,7 +346,7 @@ function apostar(apuesta,mano){
       puntero.classList.add("animate__bounce")
       puntero.classList.add("animate__infinite")
     }
-
+//arroja notificaciones que indican los creditos ganados o perdidos
 function toast(texto,color){
   Toastify({
     text: texto,
@@ -363,23 +364,26 @@ function toast(texto,color){
   }).showToast();
 
 }
-
+//utiliza localStorage para recuperar los creditos de partidas anteriores
 function recuperarMesa(){
-mesaPrevia=JSON.parse(localStorage.getItem("mesaPrevia"))
-mesa.cdts=mesaPrevia.cdts
-if(localStorage.getItem("acreditar") != ""){mesa.cdts+=parseInt(localStorage.getItem("acreditar"));guardarMesa()}
-localStorage.setItem("acreditar",'')
+if(localStorage.getItem("mesaPrevia")){
+  mesaPrevia=JSON.parse(localStorage.getItem("mesaPrevia"))
+  mesa.cdts=mesaPrevia.cdts
+}else{mesa.cdts=0}
+if(localStorage.getItem("acreditar")){mesa.cdts+=parseInt(localStorage.getItem("acreditar"));guardarMesa()}
+localStorage.removeItem("acreditar")
 actualizarNodeCdts(mesa.cdts)
 }
+//guarda los datos de la mesa actual para futuras partidas
 function guardarMesa(){
   localStorage.setItem("mesaPrevia",JSON.stringify(mesa))
 }
 
-
+//redirecciona a la pagina checkOut
 function checkOut(){
   window.location = './checkOut.html'
 }
-
+//crea una barra de progreso que se actualiza cada vez que se carga una imagen (carta) en la memoria del navegador
 function crearBarraDeProgreso(){
   let nodeBarraContenedor=document.createElement("div")
   nodeBarraContenedor.id="contenedorBarra"
@@ -388,20 +392,22 @@ function crearBarraDeProgreso(){
   nodeBarra.classList.add("progress-bar")
   nodeBarra.id="barraDeProgreso"
   nodeBarra.value=0
-
   nodeBarraContenedor.appendChild(nodeBarra)
   nodeMesa.appendChild(nodeBarraContenedor)
 }
-
+//actualiza el estado de la barra de progreso
 function actualizarBarraDeProgreso() {
-let contenedor=document.getElementById("contenedorBarra")  
-let barra=document.getElementById("barraDeProgreso")
-barra.max=mesa.maso.cartas.length
-barra.value=barra.value+1
-if(barra.value==barra.max){
-  nodeMesa.removeChild(contenedor)
-  pantallaInicial()
-}
+if(document.getElementById("contenedorBarra")){
+  let contenedor=document.getElementById("contenedorBarra")  
+  let barra=document.getElementById("barraDeProgreso")
+  barra.max=mesa.maso.cartas.length
+  barra.value=barra.value+1
+  if(barra.value==barra.max){
+    nodeMesa.removeChild(contenedor)
+    pantallaInicial()
+  }
+  
+}  
 }
 
 

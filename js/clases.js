@@ -1,9 +1,9 @@
-
+//esta clase contiene las cartas utilizadas en la partida
 class Maso {
-    cartas=[];
+    cartas=[];//contiene todas las cartas jugables
     dorso;
-    constructor (joker){
-        fetch("./js/cartas.json")
+    constructor (joker){ //el parametro joker es un booleano que se setea en true si se quiere generar un maso con jocker
+        fetch("./js/cartas.json") //se utiliza el fetch para esperar la carga del Json conteniendo toda la informacion de las cartas
         .then(response=>response.json())
         .then(response=>response.forEach(carta =>{this.cartas.push(new Carta(carta));
            })
@@ -22,14 +22,12 @@ class Maso {
               
         
     }
-
+//retorna una carta del maso al azar
 sacarCarta(){
-
-            //genera un numero aleatorio comprendido en el total de cartas del maso actual
             if(this.cartas.length>0){
             let min=0
             let max=this.cartas.length-1
-            let cartaRandom=Math.floor((Math.random() * (max - min + 1)) + min);
+            let cartaRandom=Math.floor((Math.random() * (max - min + 1)) + min); //genera un numero aleatorio comprendido en el total de cartas del maso actual
             let carta=this.cartas[cartaRandom]
             this.cartas.splice(cartaRandom,1)
             return carta
@@ -39,7 +37,7 @@ sacarCarta(){
             
     
 
-
+//Esta clase describe una carta
 class Carta{
         palo
         id
@@ -52,7 +50,7 @@ class Carta{
             this.id=cartaMolde.id
             this.valor=cartaMolde.valor
             this.color=cartaMolde.color
-            this.cargarImagen(cartaMolde.src)
+            this.cargarImagen(cartaMolde.src) 
         }
         
         girar(){
@@ -76,24 +74,24 @@ class Carta{
             }
         }
 
-        cargarImagen(src){
+        //este metodo hace un fetch de la url de la imagen (alojada en el servidor) contenida en el Json, 
+        //para poder cargarla en la memoria del navegador y de esta forma no tener que esperar la descarga cada vez que se solicita una carta nueva. 
+        cargarImagen(src){ 
             fetch(src)
             .then(response => response.blob())
             .then(blob => {
-              // aquí puedes hacer lo que necesites con el objeto Blob, por ejemplo:
-              const url = URL.createObjectURL(blob); // crear una URL para mostrar la imagen
+              const url = URL.createObjectURL(blob); // crear una URL de la imagen alojada en la memoria. 
               this.img = new Image
               this.img.src = url;
-              console.log('se cargo una imagen')
               actualizarBarraDeProgreso()
            });
         }
 
         }
-    
+    //Esta clase contiene a todo lo necesario para la partida.
     class Mesa{
     maso
-    cdts=1000    
+    cdts=0  
     manos=[]
     abierta
     enJuego
@@ -104,6 +102,7 @@ class Carta{
     this.abierta=false
     this.enJuego=false
     }
+         //este metodo se ocupa de Sacar una carta del maso, agregar la misma en la mano correspondiente, agregarla al DOM y renderizarlo en pantalla 
         entregarCartaRandom(mano,baraja,cara){
             if(baraja.cartas.length>0){
             let nCartas
@@ -149,10 +148,10 @@ class Carta{
                     if(mano==1){
                        nCartas=this.manos[0].cartas.length
                        nuevoDiv.style.left=`${(nCartas-1)*30}%`
-                       nuevoDiv.classList.add("animate__animated")    // ToDo:convertir a la funcion animarElemento
-                       nuevoDiv.classList.add("animate__backInLeft")
+                       nuevoDiv.classList.add("animate__animated")    
+                       nuevoDiv.classList.add("animate__backInDown")
                        setTimeout(() => {nuevoDiv.classList.remove("animate__animated")
-                                         nuevoDiv.classList.remove("animate__backInLeft")}, 1000);
+                                         nuevoDiv.classList.remove("animate__backInDown")}, 1000);
                        
                     }
                         else if(mano==2){
@@ -168,9 +167,9 @@ class Carta{
                         nCartas=this.manos[2].cartas.length
                         nuevoDiv.style.left=`${(nCartas-1)*30}%`
                         nuevoDiv.classList.add("animate__animated")
-                        nuevoDiv.classList.add("animate__backInRight")
+                        nuevoDiv.classList.add("animate__backInDown")
                         setTimeout(() => {nuevoDiv.classList.remove("animate__animated")
-                        nuevoDiv.classList.remove("animate__backInRight")}, 1000);
+                        nuevoDiv.classList.remove("animate__backInDown")}, 1000);
                         
                     }
                     else if(mano==4){
@@ -206,7 +205,7 @@ cerrar(){this.abierta=false}
 empezarRonda(){this.enJuego=true}
 terminarRonda(){this.enJuego=false}
         }
-
+        //Esta clase contiene las cartas de cada mano 
         class Mano{
             cartas=[]
             peso
@@ -283,8 +282,6 @@ terminarRonda(){this.enJuego=false}
                     this.puedeDoblar=false
                 }
             
-                
-               
             }
             
         

@@ -6,9 +6,19 @@ nodeCVV=document.getElementById("cvv")
 
 
 function acreditar(){
-    if(nodeCreditos != ""){
+    if(nodeCreditos.value != ""){
     localStorage.setItem("acreditar",parseInt(nodeCreditos.value))
+     
+Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: 'Gracias por elegirnos!',
+    showConfirmButton: false,
+    timer: 1500
+  }).then(() => {
+    
     window.location = './index.html'
+});
     }
 }
     

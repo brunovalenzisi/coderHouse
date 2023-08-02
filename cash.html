@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>checkOut</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="./estilos/estilosCheckOut.css">
+    <script defer src="./js/cash.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+</head>
+<body>
+  <h1><a href="./index.html">console.Blackjack()</a></h1>
+  <hr>
+  <h2>Felicitaciones! It's Pay Time</h2>
+
+<form class="importe">
+  
+  <input class="inputNumero" type="number" min="0" name="creditos" id="creditos"  placeholder="CDTS">
+  
+ 
+
+  </form>
+
+  <form class="tarjeta" onsubmit="cash();return false">
+    <header>Tus datos</header>
+    <label for="nombre">Nombre completo</laabel>
+    <input type="text" id="nombre" name="nombre" value="Cosme Fulanito" required>
+
+    <label for="telefono">Telefono</laabel>
+      <input type="text" id="telefono" name="telefono" value="11-1234-5678" required>
+
+      <label for="e-mail">e-mail</laabel>
+        <input type="text" id="mail" name="e-mail" value="cosmefulanito@gmail.com" required>
+
+        <button>Cobrar</button>
+    </form>
+    
+</body>
+
+</html>

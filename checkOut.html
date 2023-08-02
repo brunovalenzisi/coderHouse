@@ -7,15 +7,17 @@
     <link rel="shortcut icon" href="images/favicon.png" type="image/png">
     <link rel="stylesheet" href="./estilos/estilosCheckOut.css">
     <script defer src="./js/checkOut.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
 </head>
 <body>
-  <h1>console.Blackjack()</h1>
+  <h1><a href="./index.html">console.Blackjack()</a></h1>
+  <hr>
   <h2>Recarga creditos y segui jugando!</h2>
 
 <form class="importe">
   
-  <input class="inputNumero" type="number" name="creditos" id="creditos" placeholder="CDTS">
+  <input class="inputNumero" min="0" type="number" name="creditos" id="creditos"  placeholder="CDTS">
   
  
 
@@ -24,16 +26,16 @@
   <form class="tarjeta" onsubmit="acreditar();return false">
     <header>Datos de tu tarjeta</header>
     <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" name="nombre" required>
+    <input type="text" id="nombre" name="nombre" value="Cosme Fulanito" required>
     
     <label for="tarjeta">Número de tarjeta:</label>
-    <input type="text" id="tarjeta" name="tarjeta" required>
+    <input type="text" id="tarjeta" name="tarjeta" value="1234-5678-9123-4567" required>
     
     <label for="caducidad">Fecha de caducidad:</label>
-    <input type="text" id="caducidad" name="caducidad" required>
+    <input type="text" id="caducidad" name="caducidad" value="12/25" required>
     
     <label for="cvv">CVV:</label>
-    <input type="text" id="cvv" name="cvv" required>
+    <input type="text" id="cvv" name="cvv" value="123" required>
     <button>Procesar pago</button>
     </form>
     
